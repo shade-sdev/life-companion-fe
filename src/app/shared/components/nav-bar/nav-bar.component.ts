@@ -1,4 +1,4 @@
-import {Component, Input, WritableSignal} from '@angular/core';
+import {Component, HostListener, Input, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass} from "@angular/common";
 
@@ -22,8 +22,15 @@ export class NavBarComponent {
     this.darkMode?.set(!this.darkMode())
   }
 
-  blur() {
-    console.log("blur")
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    const ulElement = document.getElementById('profile-menu');
+    const triggerElement = document.getElementById('profile-menu-trigger');
+
+    if (!(triggerElement && triggerElement?.contains(clickedElement)) && !(ulElement?.contains(clickedElement))) {
+      this.profileOptionsOpen = !this.profileOptionsOpen;
+    }
   }
 
 }

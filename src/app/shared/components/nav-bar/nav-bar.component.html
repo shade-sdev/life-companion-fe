@@ -17,7 +17,7 @@
       <div class="w-full flex items-center pl-8 justify-end">
         <div class="flex items-center relative cursor-pointer">
           <div class="rounded-full">
-            <ul class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16"
+            <ul id="profile-menu" class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16"
                 [ngClass]="profileOptionsOpen ? '' : 'hidden'">
               <li
                 class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
@@ -55,12 +55,11 @@
                 class="w-2 h-2 rounded-full bg-green-400 border border-white absolute inset-0 mb-0 mr-0 m-auto"></div>
             </div>
           </div>
-          <p class="text-gray-800 dark:text-gray-100 text-sm mx-3" (click)="profileOptionsOpen = !profileOptionsOpen">
+          <p class="text-gray-800 dark:text-gray-100 text-sm mx-3">
             Jane Doe</p>
-          <div class="cursor-pointer text-gray-600 mt-1" (focusout)="profileOptionsOpen = !profileOptionsOpen"
-               tabindex="0">
+          <div id="profile-menu-trigger" class="cursor-pointer text-gray-600 mt-1">
             <ng-icon [name]="'heroChevronDownSolid'" class="dark:text-gray-100" size="1rem"
-                     (click)="profileOptionsOpen = !profileOptionsOpen"></ng-icon>
+                     (click)="this.profileOptionsOpen = !this.profileOptionsOpen"></ng-icon>
           </div>
 
         </div>
