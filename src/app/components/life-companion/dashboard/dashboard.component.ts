@@ -1,7 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
-import {SideBarComponent} from "../../../shared/components/sidebar/side-bar/side-bar.component";
-import {NavBarComponent} from "../../../shared/components/navbar/nav-bar/nav-bar.component";
+import {SideBarComponent} from "../../../shared/components/side-bar/side-bar.component";
+import {NavBarComponent} from "../../../shared/components/nav-bar/nav-bar.component";
 import {AlertService} from "../../../shared/services/alert.service";
 import {SampleModalComponent} from "../../sample-modal/sample-modal.component";
 

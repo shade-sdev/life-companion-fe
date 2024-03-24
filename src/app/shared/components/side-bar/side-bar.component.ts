@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
-import {SideBarService} from "../../../services/side-bar.service";
-import {Sidebar} from "../../../models/sidebar-model";
+import {SideBarService} from "../../services/side-bar.service";
+import {Sidebar} from "../../models/sidebar-model";
 import {NgClass, NgForOf, NgOptimizedImage} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
