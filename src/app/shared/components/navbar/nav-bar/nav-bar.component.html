@@ -57,10 +57,12 @@
           </div>
           <p class="text-gray-800 dark:text-gray-100 text-sm mx-3" (click)="profileOptionsOpen = !profileOptionsOpen">
             Jane Doe</p>
-          <div class="cursor-pointer text-gray-600 mt-1">
+          <div class="cursor-pointer text-gray-600 mt-1" (focusout)="profileOptionsOpen = !profileOptionsOpen"
+               tabindex="0">
             <ng-icon [name]="'heroChevronDownSolid'" class="dark:text-gray-100" size="1rem"
                      (click)="profileOptionsOpen = !profileOptionsOpen"></ng-icon>
           </div>
+
         </div>
       </div>
     </div>

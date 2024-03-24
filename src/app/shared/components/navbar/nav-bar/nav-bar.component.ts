@@ -22,4 +22,8 @@ export class NavBarComponent {
     this.darkMode?.set(!this.darkMode())
   }
 
+  blur() {
+    console.log("blur")
+  }
+
 }
