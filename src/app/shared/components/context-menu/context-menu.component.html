@@ -1,0 +1,26 @@
+<ul [id]="id" class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16"
+    [ngClass]="isShown() ? '' : 'hidden'">
+  <ng-container *ngFor="let menu of menu.menus">
+    <li *ngIf="menu.type == MenuItemType.LINK"
+        class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">
+      <div class="flex items-center">
+        <ng-icon [name]="menu.iconName!" size="1rem"></ng-icon>
+        <span class="text-sm ml-2">{{ menu.name }}</span>
+      </div>
+    </li>
+    <div class="border-b border-gray-700 my-4" *ngIf="menu.type == MenuItemType.CHECKBOX"></div>
+    <li *ngIf="menu.type == MenuItemType.CHECKBOX"
+        class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2">
+      <div class="flex">
+        <span class="text-sm ml-2 mr-2">Theme</span>
+        <div class="cursor-pointer mr-5 relative shadow-sm">
+          <input (click)="isChecked?.set(!isChecked?.())" type="checkbox" [name]="menu.id" [id]="menu.id"
+                 [checked]="isChecked ? isChecked?.() : false"
+                 class="focus:outline-none checkbox w-4 h-4 rounded-full bg-white absolute m-1 shadow-sm appearance-none cursor-pointer"/>
+          <label [for]="menu.id"
+                 class="toggle-label dark:bg-gray-700 block w-9 h-6 overflow-hidden rounded-full bg-gray-300 cursor-pointer"></label>
+        </div>
+      </div>
+    </li>
+  </ng-container>
+</ul>

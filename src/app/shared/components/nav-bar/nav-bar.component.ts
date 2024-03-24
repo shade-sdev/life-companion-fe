@@ -1,36 +1,48 @@
-import {Component, HostListener, Input, WritableSignal} from '@angular/core';
+import {Component, Input, signal, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass} from "@angular/common";
+import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
+import {ContextMenuComponent} from "../context-menu/context-menu.component";
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
     NgIcon,
-    NgClass
+    NgClass,
+    ContextMenuComponent
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })
 export class NavBarComponent {
 
-  public profileOptionsOpen: boolean = false;
+  public profileOptionsOpen: WritableSignal<boolean> = signal<boolean>(false);
 
   @Input() darkMode: WritableSignal<boolean> | undefined;
 
-  toggleDarkMode() {
-    this.darkMode?.set(!this.darkMode())
-  }
+  profileMenu: ContextMenus = {
+    menus: [
+      {
+        name: 'My Profile',
+        type: MenuItemType.LINK,
+        iconName: 'heroUser',
+      },
+      {
+        name: 'Sign out',
+        type: MenuItemType.LINK,
+        iconName: 'heroArrowRightEndOnRectangle',
+      },
+      {
+        id: 'darkModeToggle',
+        name: 'Theme',
+        type: MenuItemType.CHECKBOX,
+        action: () => {
+          this.darkMode?.set(!this.darkMode())
+        }
+      }
+    ]
+  };
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const clickedElement = event.target as HTMLElement;
-    const ulElement = document.getElementById('profile-menu');
-    const triggerElement = document.getElementById('profile-menu-trigger');
-
-    if (!(triggerElement && triggerElement?.contains(clickedElement)) && !(ulElement?.contains(clickedElement))) {
-      this.profileOptionsOpen = false;
-    }
-  }
 
 }
