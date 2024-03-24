@@ -29,7 +29,7 @@ export class NavBarComponent {
     const triggerElement = document.getElementById('profile-menu-trigger');
 
     if (!(triggerElement && triggerElement?.contains(clickedElement)) && !(ulElement?.contains(clickedElement))) {
-      this.profileOptionsOpen = !this.profileOptionsOpen;
+      this.profileOptionsOpen = false;
     }
   }
 
