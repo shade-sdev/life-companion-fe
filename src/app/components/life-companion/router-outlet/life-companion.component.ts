@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, signal, WritableSignal} from '@angular/core';
 import {NavBarComponent} from "../../../shared/components/navbar/nav-bar/nav-bar.component";
 import {SideBarComponent} from "../../../shared/components/sidebar/side-bar/side-bar.component";
 import {RouterOutlet} from "@angular/router";
+import {NgClass} from "@angular/common";
 
 @Component({
   selector: 'app-life-companion',
@@ -9,11 +10,14 @@ import {RouterOutlet} from "@angular/router";
   imports: [
     NavBarComponent,
     SideBarComponent,
-    RouterOutlet
+    RouterOutlet,
+    NgClass
   ],
   templateUrl: './life-companion.component.html',
   styleUrl: './life-companion.component.css'
 })
 export class LifeCompanionComponent {
+
+  public darkMode: WritableSignal<boolean> = signal<boolean>(true);
 
 }

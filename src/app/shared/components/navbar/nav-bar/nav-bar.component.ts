@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass} from "@angular/common";
 
@@ -15,5 +15,11 @@ import {NgClass} from "@angular/common";
 export class NavBarComponent {
 
   public profileOptionsOpen: boolean = false;
+
+  @Input() darkMode: WritableSignal<boolean> | undefined;
+
+  toggleDarkMode() {
+    this.darkMode?.set(!this.darkMode())
+  }
 
 }

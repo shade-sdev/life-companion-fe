@@ -25,10 +25,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.sampleModalComponent.openModal();
-    }, 100)
-    this.alertService.success("Jazz", true);
+    // setTimeout(() => {
+    //   this.sampleModalComponent.openModal();
+    // }, 100)
+    // this.alertService.success("Jazz", true);
   }
 
 }

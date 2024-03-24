@@ -1,8 +1,8 @@
-<div class="flex flex-no-wrap">
+<div class="flex flex-no-wrap" [ngClass]="darkMode() ? 'dark' : ''">
   <app-side-bar></app-side-bar>
 
-  <div class="w-full">
-    <app-nav-bar></app-nav-bar>
+  <div class="w-full dark:bg-slate-950">
+    <app-nav-bar [darkMode]="darkMode"></app-nav-bar>
 
     <div class="container mx-auto py-10">
       <router-outlet></router-outlet>
