@@ -1,0 +1,53 @@
+<form [formGroup]="editProfileFormGroup" id="form"
+      class="container mx-auto bg-gray-50 dark:bg-gray-800 shadow-lg rounded">
+  <div class="xl:w-full border-b border-gray-300 dark:border-gray-700 py-5">
+    <div class="flex items-center w-11/12 mx-auto">
+      <h1 role="heading" class="text-lg text-gray-800 dark:text-gray-100 font-bold">Personal Information</h1>
+      <div class="ml-2 cursor-pointer text-gray-600 dark:text-gray-400">
+      </div>
+    </div>
+  </div>
+  <div class="w-11/12 mx-auto">
+    <div class="container mx-auto">
+      <div class="my-8 mx-auto xl:w-full xl:mx-0">
+        <div class="xl:flex lg:flex md:flex flex-wrap justify-between">
+
+          <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+            <label for="FirstName" class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">First Name</label>
+            <input formControlName="firstName" tabindex="0" aria-label="Enter first name" type="text" name="firstName"
+                   id="FirstName"
+                   [ngClass]="formUtil.getInputBorderClass('firstName')"
+                   class="border  pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent text-gray-800 dark:text-gray-100"
+                   placeholder="John"/>
+            <app-form-error-message fieldName="firstName" [formUtil]="formUtil"></app-form-error-message>
+          </div>
+
+          <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+            <label for="lastName" class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">Last Name</label>
+            <input formControlName="lastName" tabindex="0" aria-label="Enter first name" type="text" name="lastName"
+                   id="lastName"
+                   [ngClass]="formUtil.getInputBorderClass('lastName')"
+                   class="border  pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent text-gray-800 dark:text-gray-100"
+                   placeholder="Doe"/>
+            <app-form-error-message fieldName="lastName" [formUtil]="formUtil"></app-form-error-message>
+          </div>
+
+          <div class="xl:w-2/5 lg:w-2/5 md:w-2/5 flex flex-col mb-6">
+            <label for="email" class="pb-2 text-sm font-bold text-gray-800 dark:text-gray-100">Email</label>
+            <input formControlName="email" tabindex="0" aria-label="Enter last name" type="text" id="email" name="email"
+                   [ngClass]="formUtil.getInputBorderClass('email')"
+                   class="border pl-3 py-3 shadow-sm rounded text-sm focus:outline-none bg-transparent text-gray-800 dark:text-gray-100"
+                   placeholder="email@gmail.com"/>
+            <app-form-error-message fieldName="email" [formUtil]="formUtil"></app-form-error-message>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full py-4 sm:px-12 px-4 bg-gray-100 dark:bg-gray-700 mt-6 flex justify-end rounded-bl rounded-br">
+    <button (click)="submit()" role="button" aria-label="save form"
+            class="focus:ring-2 focus:ring-indigo-800 bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-8 py-2 text-sm focus:outline-none"
+            type="submit">Save
+    </button>
+  </div>
+</form>

@@ -21,7 +21,7 @@ export class ContextMenuComponent {
 
   @Input() isShown!: WritableSignal<boolean>;
 
-  @Input() isChecked: WritableSignal<boolean> | undefined;
+  @Input() isChecked?: WritableSignal<boolean> | undefined;
 
   @Input() id!: string;
 

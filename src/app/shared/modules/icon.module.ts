@@ -3,25 +3,38 @@ import {CommonModule} from '@angular/common';
 import {NgIconsModule} from "@ng-icons/core";
 import {
   heroCheckCircleSolid,
+  heroChevronDownSolid,
+  heroChevronUpSolid,
   heroClipboardSolid,
+  heroExclamationTriangleSolid,
   heroEyeSolid,
   heroHomeSolid,
   heroMagnifyingGlassSolid,
+  heroSquares2x2Solid,
   heroStarSolid,
+  heroUserCircleSolid,
   heroXCircleSolid,
   heroXMarkSolid,
-  heroExclamationTriangleSolid,
-  heroChevronUpSolid,
-  heroSquares2x2Solid,
-  heroChevronDownSolid
 } from "@ng-icons/heroicons/solid";
-import {heroExclamationCircle, heroPencil, heroStar, heroTrash, heroUser, heroArrowRightEndOnRectangle} from "@ng-icons/heroicons/outline";
+import {
+  heroArrowRightEndOnRectangle,
+  heroCheckCircle,
+  heroExclamationCircle,
+  heroPencil,
+  heroStar,
+  heroTrash,
+  heroUser,
+  heroXCircle
+} from "@ng-icons/heroicons/outline";
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     NgIconsModule.withIcons({
+      heroXCircle,
+      heroCheckCircle,
+      heroUserCircleSolid,
       heroChevronDownSolid,
       heroArrowRightEndOnRectangle,
       heroUser,
