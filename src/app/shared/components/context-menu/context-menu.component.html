@@ -15,7 +15,7 @@
         <span class="text-sm ml-2 mr-2">Theme</span>
         <div class="cursor-pointer mr-5 relative shadow-sm">
           <input (click)="isChecked?.set(!isChecked?.())" type="checkbox" [name]="menu.id" [id]="menu.id"
-                 [checked]="isChecked ? isChecked?.() : false"
+                 [checked]="isChecked?.()"
                  class="focus:outline-none checkbox w-4 h-4 rounded-full bg-white absolute m-1 shadow-sm appearance-none cursor-pointer"/>
           <label [for]="menu.id"
                  class="toggle-label dark:bg-gray-700 block w-9 h-6 overflow-hidden rounded-full bg-gray-300 cursor-pointer"></label>
