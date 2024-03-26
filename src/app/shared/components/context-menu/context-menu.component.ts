@@ -2,6 +2,7 @@ import {Component, HostListener, Input, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-context-menu',
@@ -10,7 +11,8 @@ import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
     NgIcon,
     NgClass,
     NgForOf,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './context-menu.component.html',
   styleUrl: './context-menu.component.css'

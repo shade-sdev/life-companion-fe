@@ -29,6 +29,12 @@ export class NavBarComponent {
         iconName: 'heroUser',
       },
       {
+        name: 'Setting',
+        type: MenuItemType.LINK,
+        iconName: 'heroCog8Tooth',
+        link: '/setting'
+      },
+      {
         name: 'Sign out',
         type: MenuItemType.LINK,
         iconName: 'heroArrowRightEndOnRectangle',

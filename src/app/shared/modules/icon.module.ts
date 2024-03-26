@@ -19,6 +19,7 @@ import {
 import {
   heroArrowRightEndOnRectangle,
   heroCheckCircle,
+  heroCog8Tooth,
   heroExclamationCircle,
   heroPencil,
   heroStar,
@@ -32,6 +33,7 @@ import {
   imports: [
     CommonModule,
     NgIconsModule.withIcons({
+      heroCog8Tooth,
       heroXCircle,
       heroCheckCircle,
       heroUserCircleSolid,
