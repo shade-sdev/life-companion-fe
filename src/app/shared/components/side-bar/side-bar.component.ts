@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {SideBarService} from "../../services/side-bar.service";
 import {Sidebar} from "../../models/sidebar-model";
@@ -21,10 +21,10 @@ import {RouterLink} from "@angular/router";
 })
 export class SideBarComponent {
 
-  public readonly sideBar: Sidebar;
+  public readonly sideBar: WritableSignal<Sidebar>;
 
   public constructor(private sideBarService: SideBarService) {
-    this.sideBar = this.sideBarService.getSideBarItems();
+    this.sideBar = this.sideBarService.sideBar;
   }
 
 }
