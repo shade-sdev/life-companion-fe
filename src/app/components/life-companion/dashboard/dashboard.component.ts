@@ -4,6 +4,7 @@ import {SideBarComponent} from "../../../shared/components/side-bar/side-bar.com
 import {NavBarComponent} from "../../../shared/components/nav-bar/nav-bar.component";
 import {AlertService} from "../../../shared/services/alert.service";
 import {SampleModalComponent} from "../../sample-modal/sample-modal.component";
+import {DataTableGridComponent} from "../../../shared/components/data-table-grid/data-table-grid.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,8 @@ import {SampleModalComponent} from "../../sample-modal/sample-modal.component";
     NgIcon,
     SideBarComponent,
     NavBarComponent,
-    SampleModalComponent
+    SampleModalComponent,
+    DataTableGridComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
