@@ -8,11 +8,13 @@
     <ul class="mt-12" *ngFor="let sideBar of sideBar()?.sidebars">
       <li class="flex w-full justify-between cursor-pointer items-center mb-6"
           [ngClass]="sideBar?.active ? 'text-indigo-700' : 'text-gray-800 dark:text-gray-200'">
-        <div class="flex">
-          <ng-icon [name]="sideBar.icon" size="1.3rem"
-                   class="mr-2 flex items-center"></ng-icon>
-          <a [routerLink]="sideBar?.url" class="text-sm font-medium flex items-center">{{ sideBar?.title }}</a>
-        </div>
+        <a [routerLink]="sideBar?.url">
+          <div class="flex">
+            <ng-icon [name]="sideBar.icon" size="1.3rem"
+                     class="mr-2 flex items-center"></ng-icon>
+            <p class="text-sm font-medium flex items-center">{{ sideBar?.title }}</p>
+          </div>
+        </a>
       </li>
     </ul>
   </div>
