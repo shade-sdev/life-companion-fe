@@ -29,6 +29,13 @@ export class SideBarService {
           icon: 'heroSquares2x2Solid'
         },
         {
+          title: 'Users',
+          url: '/users',
+          active: this.currentUrl.includes('users'),
+          authorities: [],
+          icon: 'heroUserGroupSolid'
+        },
+        {
           title: 'Setting',
           url: '/setting',
           active: this.currentUrl.includes('setting'),
