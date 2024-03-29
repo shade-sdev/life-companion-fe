@@ -10,6 +10,7 @@ import {
   heroClipboardSolid,
   heroExclamationTriangleSolid,
   heroEyeSolid,
+  heroFunnelSolid,
   heroHomeSolid,
   heroMagnifyingGlassSolid,
   heroSquares2x2Solid,
@@ -17,7 +18,7 @@ import {
   heroUserCircleSolid,
   heroUserGroupSolid,
   heroXCircleSolid,
-  heroXMarkSolid
+  heroXMarkSolid,
 } from "@ng-icons/heroicons/solid";
 import {
   heroArrowRightEndOnRectangle,
@@ -60,7 +61,8 @@ import {
       heroChevronUpSolid,
       heroUserGroupSolid,
       heroChevronRightSolid,
-      heroChevronLeftSolid
+      heroChevronLeftSolid,
+      heroFunnelSolid
     })
   ],
   exports: [NgIconsModule]

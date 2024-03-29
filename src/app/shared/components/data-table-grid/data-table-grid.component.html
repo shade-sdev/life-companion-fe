@@ -1,123 +1,118 @@
-<div class="mx-auto container bg-white dark:bg-gray-800 shadow rounded">
-  <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
-    <table class="min-w-full bg-white dark:bg-gray-800">
-      <thead>
-      <tr class="w-full h-14 border-gray-300 dark:border-gray-700 border-b py-8">
-        <th
-          class="w-28 whitespace-nowrap pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
-          <div class="flex flex-row items-center">
-          <input placeholder="check box" type="checkbox"
-                 class="cursor-pointer w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
-            <div
-              class="ml-6 mr-6 h-6 w-0.5 bg-neutral-100 dark:bg-white/10"></div>
-          </div>
-        </th>
-        <th role="columnheader"
-            class="w-28 whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
-          <div class="flex flex-row items-center">
-            <p>Invoice Number</p>
-            <div
-              class="ml-6 mr-6 h-6 w-0.5 bg-neutral-100 dark:bg-white/10"></div>
-          </div>
+<div class="min-w-full mx-auto container bg-white dark:bg-gray-800 shadow rounded">
+  <table class="min-w-full bg-white dark:bg-gray-800">
+    <thead>
+    <tr class="h-14 border-gray-300 dark:border-gray-700 border-b py-8">
+      <th
+        class="w-10 whitespace-nowrap pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
+        <input placeholder="check box" type="checkbox"
+               class="cursor-pointer w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
+      </th>
+      <th role="columnheader"
+          class="w-28 whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
+        Invoice Number
+      </th>
+      <th role="columnheader"
+          class="w-28 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Client
+      </th>
+      <th role="columnheader"
+          class="w-28 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+        Company Contact
+      </th>
+      <th role="columnheader"
+          class="w-28 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Amount
+      </th>
+      <th role="columnheader"
+          class="w-28 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Date
+      </th>
 
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Client
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
-          Company Contact
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Amount
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Date
-        </th>
-
-        <td role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">More
-        </td>
-      </tr>
-      <tr class="w-full h-14 border-gray-300 dark:border-gray-700 border-b py-8">
-        <th class="pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
-          <input tabindex="0" aria-label="Enter first name" type="text" name="firstName"
-                 id="FirstName"
-                 class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+      <th role="columnheader"
+          class="w-28 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">More
+      </th>
+    </tr>
+    <tr class="w-full h-14 border-gray-300 dark:border-gray-700 border-b py-8">
+      <th class="pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+      </th>
+      <th role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+        <input tabindex="0" aria-label="Enter first name" type="text"
+               class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
                  focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white"
-                 placeholder="John"/>
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Client
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
-          Company Contact
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Amount
-        </th>
-        <th role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Date
-        </th>
+               placeholder="John"/>
+      </th>
+      <th role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+        <div class="flex flex-row items-center">
+          <input tabindex="0" disabled aria-label="Enter first name" type="text"
+                 class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+                 focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white mr-2"/>
+          <ng-icon id="fref" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
+        </div>
+      </th>
+      <th role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+        Company Contact
+      </th>
+      <th role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Amount
+      </th>
+      <th role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">Date
+      </th>
 
-        <td role="columnheader"
-            class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">More
-        </td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="h-16 border-gray-300 dark:border-gray-700 border-b">
-        <td
-          class="pl-8 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-          <input placeholder="check box" type="checkbox"
-                 class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
-        </td>
+      <td role="columnheader"
+          class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">More
+      </td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="h-16 border-gray-300 dark:border-gray-700 border-b">
+      <td
+        class="pl-8 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+        <input placeholder="check box" type="checkbox"
+               class="cursor-pointer relative w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
+      </td>
 
-        <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-          #MC10023
-        </td>
-        <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">Toyota
-          Motors
-        </td>
-        <td class="">
-          <p class="text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm">Carrie Anthony</p>
-        </td>
-        <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">$2,500
-        </td>
-        <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
-          02.03.20
-        </td>
-        <td class="">
-          <button aria-label="dropdown" role="button"
-                  class="dropbtn text-gray-500 rounded cursor-pointer border border-transparent  focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400">
-            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/compact_table_with_actions_and_select-svg9.svg"
-                 alt="dropdown">
-          </button>
-          <div class="dropdown-content mt-1 absolute left-0 -ml-12 shadow-md z-10 hidden w-32">
-            <ul class="bg-white dark:bg-gray-800 shadow rounded py-1">
-              <li
-                class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                Edit
-              </li>
-              <li
-                class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                Delete
-              </li>
-              <li
-                class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
-                Duplicate
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+      <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+        #MC10023
+      </td>
+      <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">Toyota
+        Motors
+      </td>
+      <td class="">
+        <p class="text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm">Carrie Anthony</p>
+      </td>
+      <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">$2,500
+      </td>
+      <td class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+        02.03.20
+      </td>
+      <td class="">
+        <button aria-label="dropdown" role="button"
+                class="dropbtn text-gray-500 rounded cursor-pointer border border-transparent  focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400">
+          <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/compact_table_with_actions_and_select-svg9.svg"
+               alt="dropdown">
+        </button>
+        <div class="dropdown-content mt-1 absolute left-0 -ml-12 shadow-md z-10 hidden w-32">
+          <ul class="bg-white dark:bg-gray-800 shadow rounded py-1">
+            <li
+              class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
+              Edit
+            </li>
+            <li
+              class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
+              Delete
+            </li>
+            <li
+              class="cursor-pointer text-gray-600 dark:text-gray-400 text-sm leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">
+              Duplicate
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
   <div class="flex flex-row p-4 justify-end">
     <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">1 - 20 of 60</p>
     <div class="flex flex-row justify-center">

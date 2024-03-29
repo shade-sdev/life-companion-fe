@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {ContextMenuComponent} from "../context-menu/context-menu.component";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -8,7 +9,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   imports: [
     NgIcon,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ContextMenuComponent
   ],
   templateUrl: './data-table-grid.component.html',
   styleUrl: './data-table-grid.component.css'
