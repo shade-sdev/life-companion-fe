@@ -1,5 +1,5 @@
-<ul [id]="id" class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16"
-    [ngClass]="isShown() ? '' : 'hidden'">
+<ul [id]="elementId" class="p-2 w-full border-r bg-white absolute rounded left-0 shadow mt-12 sm:mt-16"
+    [ngClass]="shown() ? '' : 'hidden'">
   <ng-container *ngFor="let menu of menu.menus">
     <li *ngIf="menu.type == MenuItemType.LINK"
         class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center">

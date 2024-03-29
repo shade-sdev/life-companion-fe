@@ -41,11 +41,16 @@
       </th>
       <th role="columnheader"
           class="text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+
         <div class="flex flex-row items-center">
           <input tabindex="0" disabled aria-label="Enter first name" type="text"
                  class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
                  focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white mr-2"/>
-          <ng-icon id="fref" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
+          <button (click)="menus.triggerMenu()">
+            <ng-icon id="clientFilterId" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
+          </button>
+          <app-checked-context-menu #menus [elementId]="'clientFilterMenuId'" [triggerId]="'clientFilterId'"
+                                    [items]="menu" [position]="'ml-2'"></app-checked-context-menu>
         </div>
       </th>
       <th role="columnheader"

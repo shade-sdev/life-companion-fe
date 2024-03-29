@@ -1,8 +1,9 @@
-import {Component, HostListener, Input, WritableSignal} from '@angular/core';
+import {Component, Input, signal, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
 import {RouterLink} from "@angular/router";
+import {ContextMenuUtil} from "../../models/context-menu-util";
 
 @Component({
   selector: 'app-context-menu',
@@ -17,29 +18,24 @@ import {RouterLink} from "@angular/router";
   templateUrl: './context-menu.component.html',
   styleUrl: './context-menu.component.css'
 })
-export class ContextMenuComponent {
+export class ContextMenuComponent extends ContextMenuUtil {
 
   protected readonly MenuItemType = MenuItemType;
 
-  @Input() isShown!: WritableSignal<boolean>;
+  public override shown: WritableSignal<boolean> = signal(false);
 
   @Input() isChecked?: WritableSignal<boolean> | undefined;
 
-  @Input() id!: string;
+  @Input() override elementId!: string;
 
-  @Input() triggerId!: string;
+  @Input() override triggerId!: string;
 
   @Input() menu!: ContextMenus;
 
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const clickedElement = event.target as HTMLElement;
-    const ulElement = document.getElementById(this.id);
-    const triggerElement = document.getElementById(this.triggerId);
-
-    if (!(triggerElement && triggerElement?.contains(clickedElement)) && !(ulElement?.contains(clickedElement))) {
-      this.isShown.set(false);
-    }
+  constructor() {
+    super();
+    this.init(this.shown, this.elementId, this.triggerId);
   }
+
 
 }
