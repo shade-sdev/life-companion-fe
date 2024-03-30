@@ -5,6 +5,7 @@ import {ContextMenuComponent} from "../context-menu/context-menu.component";
 import {CheckedContextMenuComponent} from "../checked-context-menu/checked-context-menu.component";
 import {Header, SearchType} from "../../models/table-model";
 import {NgForOf, NgIf} from "@angular/common";
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -16,7 +17,8 @@ import {NgForOf, NgIf} from "@angular/common";
     ContextMenuComponent,
     CheckedContextMenuComponent,
     NgForOf,
-    NgIf
+    NgIf,
+    TranslateModule
   ],
   templateUrl: './data-table-grid.component.html',
   styleUrl: './data-table-grid.component.css'
@@ -34,6 +36,10 @@ export class DataTableGridComponent {
   @Input() data: Array<any> = []
 
   @Output() checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
+
+  constructor(public translateService: TranslateService) {
+
+  }
 
   onCheckboxChange(event: any, row: any) {
     if (row === null) {

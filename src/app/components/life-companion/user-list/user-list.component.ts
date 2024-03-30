@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {DataTableGridComponent} from "../../../shared/components/data-table-grid/data-table-grid.component";
 import {AgeGroup, Gender, Person} from "../../../shared/models/person";
-import {DefaultEnum, Header, SearchType} from "../../../shared/models/table-model";
+import {ALL, Header, SearchType} from "../../../shared/models/table-model";
 
 @Component({
   selector: 'app-user-list',
@@ -52,7 +52,8 @@ export class UserListComponent {
       filter: {
         searchable: true,
         searchType: SearchType.ENUM,
-        enum: [...Object.values(DefaultEnum), ...Object.values(Gender)]
+        translateKey: 'modules.person.gender.',
+        enum: [...Object.values(ALL), ...Object.values(Gender)]
       }
     },
     {
@@ -62,7 +63,8 @@ export class UserListComponent {
       filter: {
         searchable: true,
         searchType: SearchType.ENUM,
-        enum: [...Object.values(DefaultEnum), ...Object.values(AgeGroup)]
+        translateKey: 'modules.person.ageGroup.',
+        enum: [...Object.values(ALL), ...Object.values(AgeGroup)]
       }
     }
   ]

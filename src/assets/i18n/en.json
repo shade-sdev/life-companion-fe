@@ -1,0 +1,19 @@
+{
+  "modules": {
+    "person": {
+      "gender": {
+        "MALE": "Male",
+        "FEMALE": "Female"
+      },
+      "ageGroup": {
+        "CHILD": "Child",
+        "ADULT": "Adult"
+      }
+    },
+    "common": {
+      "types": {
+        "ALL": "All"
+      }
+    }
+  }
+}

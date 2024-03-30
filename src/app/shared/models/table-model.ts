@@ -12,6 +12,7 @@ export interface Header {
 export class HeaderFilter<T> {
   searchable!: boolean;
   searchType?: SearchType;
+  translateKey?: string;
   enum?: Array<T>
 }
 
@@ -19,6 +20,8 @@ export enum SearchType {
   TEXT, ENUM
 }
 
-export enum DefaultEnum {
-  ALL = "All"
+export type ALL = 'ALL';
+
+export const ALL = {
+  ALL: 'ALL' as ALL
 }
