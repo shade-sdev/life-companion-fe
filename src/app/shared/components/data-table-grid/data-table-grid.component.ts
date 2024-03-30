@@ -28,21 +28,24 @@ export class DataTableGridComponent {
 
   protected readonly SearchType = SearchType;
 
-  public selectAll: boolean = false;
+  protected selectAll: boolean = false;
 
   public checkedRows: Array<any> = [];
 
-  @Input() headers: Array<Header> = [];
+  @Input()
+  headers: Array<Header> = [];
 
-  @Input() data: Array<any> = []
+  @Input()
+  data: Array<any> = []
 
-  @Output() checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
+  @Output()
+  protected checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
-  onEnumFilter(value: Array<CheckedContextMenu<any>>) {
+  protected onEnumFilter(value: Array<CheckedContextMenu<any>>) {
     console.log(value);
   }
 
-  onCheckboxChange(event: any, row: any) {
+  protected onCheckboxChange(event: any, row: any) {
     if (row === null) {
       this.selectAll = event.target.checked;
       this.checkedRows = this.selectAll ? [...this.data] : [];

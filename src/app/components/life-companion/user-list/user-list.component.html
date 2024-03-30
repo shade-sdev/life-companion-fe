@@ -1,2 +1,5 @@
-<app-data-table-grid [data]="persons" [headers]="headers"
-                     (checkedRowsEmitter)="personChange($event)"></app-data-table-grid>
+<app-data-table-grid #userTableGrid
+                     [data]="persons"
+                     [headers]="headers"
+                     (checkedRowsEmitter)="personChange($event)">
+</app-data-table-grid>

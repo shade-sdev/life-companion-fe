@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {DataTableGridComponent} from "../../../shared/components/data-table-grid/data-table-grid.component";
 import {AgeGroup, Gender, Person} from "../../../shared/models/person";
 import {ALL, Header, SearchType} from "../../../shared/models/table-model";
@@ -13,6 +13,8 @@ import {ALL, Header, SearchType} from "../../../shared/models/table-model";
   styleUrl: './user-list.component.css'
 })
 export class UserListComponent {
+
+  @ViewChild("userTableGrid") userTableGrid: DataTableGridComponent = new DataTableGridComponent();
 
   public personChange(persons: Array<Person>) {
     console.log(persons);
