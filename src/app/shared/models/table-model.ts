@@ -20,8 +20,8 @@ export enum SearchType {
   TEXT, ENUM
 }
 
-export type ALL = 'ALL';
+export type AllType = 'ALL';
 
 export const ALL = {
-  ALL: 'ALL' as ALL
+  ALL: 'ALL' as AllType
 }

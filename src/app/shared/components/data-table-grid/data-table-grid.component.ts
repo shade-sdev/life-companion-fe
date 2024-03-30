@@ -5,7 +5,8 @@ import {ContextMenuComponent} from "../context-menu/context-menu.component";
 import {CheckedContextMenuComponent} from "../checked-context-menu/checked-context-menu.component";
 import {Header, SearchType} from "../../models/table-model";
 import {NgForOf, NgIf} from "@angular/common";
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {TranslateModule} from "@ngx-translate/core";
+import {CheckedContextMenu} from "../../models/checked-context-menu";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -37,8 +38,8 @@ export class DataTableGridComponent {
 
   @Output() checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
-  constructor(public translateService: TranslateService) {
-
+  onEnumFilter(value: Array<CheckedContextMenu<any>>) {
+    console.log(value);
   }
 
   onCheckboxChange(event: any, row: any) {

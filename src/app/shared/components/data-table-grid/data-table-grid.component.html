@@ -30,6 +30,8 @@
                 <ng-icon [id]="header.id + 'FilterTriggerId'" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
               </button>
               <app-checked-context-menu #menus
+                                        (checkedRowsEmitter)="onEnumFilter($event)"
+                                        [key]="header.id"
                                         [elementId]="header.id + 'FilterMenuId'"
                                         [triggerId]="header.id + 'FilterTriggerId'"
                                         [items]="header.filter.enum!"

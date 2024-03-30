@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal} from '@angular/core';
 import {NgClass, NgForOf} from "@angular/common";
 import {CheckedContextMenu} from "../../models/checked-context-menu";
 import {ContextMenuUtil} from "../../models/context-menu-util";
@@ -18,6 +18,10 @@ import {lastValueFrom} from "rxjs";
 })
 export class CheckedContextMenuComponent extends ContextMenuUtil implements OnInit {
 
+  public selectAll: boolean = false;
+
+  public checkedRows: Array<any> = [];
+
   public override shown: WritableSignal<boolean> = signal(false);
 
   @Input() position!: string;
@@ -26,9 +30,13 @@ export class CheckedContextMenuComponent extends ContextMenuUtil implements OnIn
 
   @Input() override triggerId!: string;
 
+  @Input() key!: string;
+
   @Input() items!: Array<any>;
 
   @Input() translateKey!: string;
+
+  @Output() checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   menuItems: Array<CheckedContextMenu<any>> = [];
 
@@ -41,11 +49,28 @@ export class CheckedContextMenuComponent extends ContextMenuUtil implements OnIn
 
     for (const value of this.items) {
       this.menuItems?.push({
+        key: this.key,
         name: await this.translate(value),
         value: value,
-        checked: value == ALL
       });
     }
+  }
+
+  onCheckboxChange(event: any, row: CheckedContextMenu<any>) {
+    if (row.value == ALL.ALL) {
+      this.selectAll = event.target.checked;
+      this.checkedRows = this.selectAll ? [ALL.ALL] : [];
+    } else {
+      if (event.target.checked) {
+        this.checkedRows.push(row);
+      } else {
+        const index = this.checkedRows.indexOf(row);
+        if (index !== -1) {
+          this.checkedRows.splice(index, 1);
+        }
+      }
+    }
+    this.checkedRowsEmitter.emit(this.checkedRows);
   }
 
   private async translate(value: any): Promise<string> {
