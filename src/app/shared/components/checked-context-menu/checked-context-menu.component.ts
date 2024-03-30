@@ -1,7 +1,8 @@
-import {Component, Input, signal, WritableSignal} from '@angular/core';
+import {Component, Input, OnInit, signal, WritableSignal} from '@angular/core';
 import {NgClass, NgForOf} from "@angular/common";
 import {CheckedContextMenu} from "../../models/checked-context-menu";
 import {ContextMenuUtil} from "../../models/context-menu-util";
+import {DefaultEnum} from "../../models/table-model";
 
 @Component({
   selector: 'app-checked-context-menu',
@@ -13,7 +14,7 @@ import {ContextMenuUtil} from "../../models/context-menu-util";
   templateUrl: './checked-context-menu.component.html',
   styleUrl: './checked-context-menu.component.css'
 })
-export class CheckedContextMenuComponent extends ContextMenuUtil {
+export class CheckedContextMenuComponent extends ContextMenuUtil implements OnInit {
 
   public override shown: WritableSignal<boolean> = signal(false);
 
@@ -23,11 +24,25 @@ export class CheckedContextMenuComponent extends ContextMenuUtil {
 
   @Input() override triggerId!: string;
 
-  @Input() items!: Array<CheckedContextMenu<any>>
+  @Input() items!: Array<any>;
+
+  menuItems: Array<CheckedContextMenu<any>> = [];
 
   constructor() {
     super();
+  }
+
+  ngOnInit(): void {
     this.init(this.shown, this.elementId, this.triggerId);
+
+    this.items?.filter((value: any) => typeof value != 'number')
+      .forEach(value => {
+        this.menuItems?.push({
+          name: value,
+          value: value.value,
+          checked: value.value == DefaultEnum
+        });
+      });
   }
 
 }
