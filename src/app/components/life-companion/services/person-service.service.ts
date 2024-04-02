@@ -5,15 +5,13 @@ import {Observable} from "rxjs";
 import {HttpParams} from "@angular/common/http";
 
 @Injectable()
-export class UserServiceService {
+export class PersonServiceService extends HttpService {
 
   private readonly personBaseUrl = "/persons"
 
-  constructor(private httpService: HttpService) {
-  }
 
   public searchPersons(param: HttpParams): Observable<PersonSearchResult> {
-    return this.httpService.getEntity<PersonSearchResult>(this.personBaseUrl, param);
+    return this.getEntity<PersonSearchResult>(this.personBaseUrl, param);
   }
 
 }

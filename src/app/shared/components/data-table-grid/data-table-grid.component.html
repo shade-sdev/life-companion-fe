@@ -41,7 +41,7 @@
               </button>
               <app-checked-context-menu #menus
                                         (checkedRowsEmitter)="onEnumFilter($event);
-                                        header.filter.value = contextMenuToInputField(menus.checkedRows);
+                                       ;
                                         criteria[header.id] = contextMenuToEnum(menus.checkedRows);"
                                         [key]="header.id"
                                         [elementId]="header.id + 'FilterMenuId'"

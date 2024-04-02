@@ -11,7 +11,7 @@ export class HttpService {
 
   private readonly baseUrl = environment.baseApiPath;
 
-  public getEntity<T>(
+  protected getEntity<T>(
     path: string,
     params?: HttpParams,
     headers?: HttpHeaders
@@ -25,7 +25,7 @@ export class HttpService {
     return this.httpClient.get<T>(url, options);
   }
 
-  public postEntity<T>(
+  protected postEntity<T>(
     path: string,
     body: any,
     headers?: HttpHeaders,
@@ -41,7 +41,7 @@ export class HttpService {
     return this.httpClient.post<T>(url, body, options);
   }
 
-  public putEntity<T>(
+  protected putEntity<T>(
     path: string,
     body: any,
     headers?: HttpHeaders,
@@ -56,7 +56,7 @@ export class HttpService {
     return this.httpClient.put<T>(url, body, options);
   }
 
-  public deleteEntity<T>(
+  protected deleteEntity<T>(
     path: string,
     headers?: HttpHeaders,
     params?: HttpParams
@@ -72,8 +72,9 @@ export class HttpService {
 
   public objectToHttpParams(obj: any): HttpParams {
     let params = new HttpParams();
+
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null) {
+      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key] == "") {
         if (Array.isArray(obj[key])) {
           obj[key].forEach((value: any) => {
             params = params.append(key, value.toString());
@@ -83,6 +84,8 @@ export class HttpService {
         }
       }
     }
+    params = params.set("pageNumber", 0);
+    params = params.set("pageSize", 10);
     return params;
   }
 }

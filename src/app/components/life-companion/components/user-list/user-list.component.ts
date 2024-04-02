@@ -1,8 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DataTableGridComponent} from "../../../../shared/components/data-table-grid/data-table-grid.component";
 import {ALL, Header, SearchType} from "../../../../shared/models/common/table-model";
 import {PersonSearchCriteria} from "../../../../shared/models/person/person-search-criteria";
 import {AgeGroup, Gender, Person} from "../../../../shared/models/person/person";
+import {PersonServiceService} from "../../services/person-service.service";
 
 
 @Component({
@@ -11,17 +12,39 @@ import {AgeGroup, Gender, Person} from "../../../../shared/models/person/person"
   imports: [
     DataTableGridComponent
   ],
+  providers: [PersonServiceService],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
 
   @ViewChild("userTableGrid") userTableGrid: DataTableGridComponent = new DataTableGridComponent();
 
   personSearchCriteria = new PersonSearchCriteria();
 
+  persons: Array<Person> = [];
+
+  constructor(private personService: PersonServiceService) {
+  }
+
+  ngOnInit(): void {
+    this.personService.searchPersons(this.personService.objectToHttpParams(this.personSearchCriteria))
+      .subscribe({
+        next: value => {
+          this.persons = value.elements;
+        }
+      })
+  }
+
   public onFilter() {
-    console.log(this.personSearchCriteria)
+    console.log(this.personSearchCriteria);
+    this.personService.searchPersons(this.personService.objectToHttpParams(this.personSearchCriteria))
+      .subscribe({
+        next: value => {
+          this.persons = value.elements;
+        }
+      })
+
   }
 
   headers: Array<Header> = [
@@ -74,226 +97,5 @@ export class UserListComponent {
       }
     }
   ]
-
-  persons: Array<Person> = [
-    {
-      firstName: "John",
-      lastName: "Doe",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=JohnDoe",
-      ageGroup: AgeGroup.CHILD
-    },
-    {
-      firstName: "Jane",
-      lastName: "Doe",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=JaneDoe",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Alice",
-      lastName: "Smith",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=AliceSmith",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Bob",
-      lastName: "Johnson",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=BobJohnson",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Emily",
-      lastName: "Brown",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=EmilyBrown",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Michael",
-      lastName: "Wilson",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=MichaelWilson",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Jessica",
-      lastName: "Taylor",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=JessicaTaylor",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "William",
-      lastName: "Martinez",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=WilliamMartinez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Sophia",
-      lastName: "Anderson",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=SophiaAnderson",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Daniel",
-      lastName: "Thomas",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=DanielThomas",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Olivia",
-      lastName: "Hernandez",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=OliviaHernandez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Matthew",
-      lastName: "Young",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=MatthewYoung",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Ava",
-      lastName: "King",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=AvaKing",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "David",
-      lastName: "Lee",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=DavidLee",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Emma",
-      lastName: "Gonzalez",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=EmmaGonzalez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Liam",
-      lastName: "Rodriguez",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=LiamRodriguez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Isabella",
-      lastName: "Nelson",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=IsabellaNelson",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "James",
-      lastName: "Perez",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=JamesPerez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Mia",
-      lastName: "Ramirez",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=MiaRamirez",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Benjamin",
-      lastName: "Evans",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=BenjaminEvans",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Charlotte",
-      lastName: "Stewart",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=CharlotteStewart",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Ethan",
-      lastName: "Cook",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=EthanCook",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Amelia",
-      lastName: "Morris",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=AmeliaMorris",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Alexander",
-      lastName: "Rogers",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=AlexanderRogers",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Evelyn",
-      lastName: "Reed",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=EvelynReed",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Daniel",
-      lastName: "Cook",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=DanielCook",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Abigail",
-      lastName: "Collins",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=AbigailCollins",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Matthew",
-      lastName: "Bell",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=MatthewBell",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Emily",
-      lastName: "Murphy",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=EmilyMurphy",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Christopher",
-      lastName: "Ward",
-      gender: Gender.MALE,
-      picture: "https://ui-avatars.com/api/?name=ChristopherWard",
-      ageGroup: AgeGroup.ADULT
-    },
-    {
-      firstName: "Harper",
-      lastName: "Peterson",
-      gender: Gender.FEMALE,
-      picture: "https://ui-avatars.com/api/?name=HarperPeterson",
-      ageGroup: AgeGroup.ADULT
-    }
-  ];
-
 
 }
