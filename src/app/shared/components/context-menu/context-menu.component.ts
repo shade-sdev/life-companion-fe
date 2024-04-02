@@ -1,9 +1,9 @@
 import {Component, Input, signal, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
+import {ContextMenus, MenuItemType} from "../../models/common/context-menu-model";
 import {RouterLink} from "@angular/router";
-import {ContextMenuUtil} from "../../models/context-menu-util";
+import {ContextMenuUtil} from "../../models/common/context-menu-util";
 
 @Component({
   selector: 'app-context-menu',

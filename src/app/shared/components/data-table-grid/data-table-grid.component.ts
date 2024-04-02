@@ -3,10 +3,10 @@ import {NgIcon} from "@ng-icons/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ContextMenuComponent} from "../context-menu/context-menu.component";
 import {CheckedContextMenuComponent} from "../checked-context-menu/checked-context-menu.component";
-import {Header, SearchType} from "../../models/table-model";
+import {Header, SearchType} from "../../models/common/table-model";
 import {NgForOf, NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
-import {CheckedContextMenu} from "../../models/checked-context-menu";
+import {CheckedContextMenu} from "../../models/common/checked-context-menu";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -28,9 +28,9 @@ export class DataTableGridComponent {
 
   protected readonly SearchType = SearchType;
 
-  protected selectAll: boolean = false;
-
   public checkedRows: Array<any> = [];
+
+  protected selectAll: boolean = false;
 
   @Input()
   headers: Array<Header> = [];
@@ -38,11 +38,17 @@ export class DataTableGridComponent {
   @Input()
   data: Array<any> = []
 
+  @Input()
+  criteria: any;
+
   @Output()
   protected checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
+  @Output()
+  protected filterEmitter: EventEmitter<void> = new EventEmitter<void>();
+
   protected onEnumFilter(value: Array<CheckedContextMenu<any>>) {
-    console.log(value);
+    this.filterEmitter.emit()
   }
 
   protected onCheckboxChange(event: any, row: any) {
@@ -60,6 +66,18 @@ export class DataTableGridComponent {
       }
     }
     this.checkedRowsEmitter.emit(this.checkedRows);
+  }
+
+  protected onTextChange(event: any) {
+    this.filterEmitter.emit();
+  }
+
+  protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
+    return menus.map(value => value?.name ?? value).join(', ');
+  }
+
+  protected contextMenuToEnum(menus: CheckedContextMenu<any>[]) {
+    return menus.map(value => value?.value);
   }
 
 }

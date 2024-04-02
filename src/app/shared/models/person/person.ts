@@ -1,9 +1,12 @@
-export interface Person {
-  firstName: string;
-  lastName: string;
-  profilePicture: string;
-  gender: Gender;
-  ageGroup: AgeGroup;
+import {v4 as uuidv4} from 'uuid';
+
+export class Person {
+  id?: typeof uuidv4;
+  picture?: string;
+  firstName!: string;
+  lastName!: string;
+  gender!: Gender;
+  ageGroup!: AgeGroup;
 }
 
 export type Gender = 'MALE' | 'FEMALE';

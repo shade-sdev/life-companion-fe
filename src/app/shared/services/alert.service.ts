@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable, take, timer} from "rxjs";
-import {AlertType, Notification} from "../models/alert-model";
+import {AlertType, Notification} from "../models/common/alert-model";
 
 @Injectable()
 export class AlertService {

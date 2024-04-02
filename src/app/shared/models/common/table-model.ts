@@ -6,14 +6,15 @@ export interface Header {
   id: string;
   name: string;
   shown: boolean;
-  filter: HeaderFilter<any>
+  filter: HeaderFilter
 }
 
-export class HeaderFilter<T> {
+export class HeaderFilter {
   searchable!: boolean;
   searchType?: SearchType;
   translateKey?: string;
-  enum?: Array<T>
+  enum?: Array<any>;
+  value?: any;
 }
 
 export enum SearchType {

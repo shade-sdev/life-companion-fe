@@ -1,5 +1,6 @@
 <app-data-table-grid #userTableGrid
                      [data]="persons"
                      [headers]="headers"
-                     (checkedRowsEmitter)="personChange($event)">
+                     [criteria]="personSearchCriteria"
+                     (filterEmitter)="onFilter()">
 </app-data-table-grid>

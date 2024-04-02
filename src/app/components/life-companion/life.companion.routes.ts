@@ -3,14 +3,14 @@ import {Route} from "@angular/router";
 export const LIFE_COMPANION_ROUTES: Route[] = [
   {
     path: 'dashboard',
-    loadComponent: () => import('./dashboard/dashboard.component').then(component => component.DashboardComponent)
+    loadComponent: () => import('./components/dashboard/dashboard.component').then(component => component.DashboardComponent)
   },
   {
     path: 'users',
-    loadComponent: () => import('./user-list/user-list.component').then(component => component.UserListComponent)
+    loadComponent: () => import('./components/user-list/user-list.component').then(component => component.UserListComponent)
   },
   {
     path: 'setting',
-    loadComponent: () => import('./setting/setting.component').then(component => component.SettingComponent)
+    loadComponent: () => import('./components/setting/setting.component').then(component => component.SettingComponent)
   }
 ]

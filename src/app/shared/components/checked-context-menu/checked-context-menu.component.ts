@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output, signal, WritableSignal} from '@angular/core';
 import {NgClass, NgForOf} from "@angular/common";
-import {CheckedContextMenu} from "../../models/checked-context-menu";
-import {ContextMenuUtil} from "../../models/context-menu-util";
-import {ALL} from "../../models/table-model";
+import {CheckedContextMenu} from "../../models/common/checked-context-menu";
+import {ContextMenuUtil} from "../../models/common/context-menu-util";
+import {ALL} from "../../models/common/table-model";
 import {TranslateService} from "@ngx-translate/core";
 import {lastValueFrom} from "rxjs";
 
@@ -60,7 +60,7 @@ export class CheckedContextMenuComponent extends ContextMenuUtil implements OnIn
     if (row.value == ALL.ALL) {
       this.selectAll = event.target.checked;
       this.checkedRows = this.selectAll ? [ALL.ALL] : [];
-    } else {
+    } else if (!this.selectAll) {
       if (event.target.checked) {
         this.checkedRows.push(row);
       } else {
@@ -80,4 +80,5 @@ export class CheckedContextMenuComponent extends ContextMenuUtil implements OnIn
     return await lastValueFrom(this.translateService.get(`${this.translateKey}${value}`));
   }
 
+  protected readonly ALL = ALL;
 }

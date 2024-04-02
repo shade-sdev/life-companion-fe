@@ -1,6 +1,6 @@
 import {Injectable, signal, WritableSignal} from "@angular/core";
 import {NavigationEnd, Router} from "@angular/router";
-import {Sidebar} from "../models/sidebar-model";
+import {Sidebar} from "../models/common/sidebar-model";
 import {filter} from "rxjs";
 
 @Injectable()

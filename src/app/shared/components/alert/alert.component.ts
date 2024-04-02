@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
-import {Notification} from "../../models/alert-model";
+import {Notification} from "../../models/common/alert-model";
 
 @Component({
   selector: 'app-alert',

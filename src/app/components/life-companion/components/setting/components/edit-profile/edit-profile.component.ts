@@ -2,10 +2,10 @@ import {Component, signal, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgClass, NgIf} from "@angular/common";
-import {FormUtil} from "../../../../../shared/form/form-util";
+import {FormUtil} from "../../../../../../shared/form/form-util";
 import {
   FormErrorMessageComponent
-} from "../../../../../shared/components/form-error-message/form-error-message.component";
+} from "../../../../../../shared/components/form-error-message/form-error-message.component";
 
 @Component({
   selector: 'app-edit-profile',

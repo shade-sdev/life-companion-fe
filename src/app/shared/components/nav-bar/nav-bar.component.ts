@@ -1,7 +1,7 @@
 import {Component, Input, signal, WritableSignal} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {NgClass} from "@angular/common";
-import {ContextMenus, MenuItemType} from "../../models/context-menu-model";
+import {ContextMenus, MenuItemType} from "../../models/common/context-menu-model";
 import {ContextMenuComponent} from "../context-menu/context-menu.component";
 
 @Component({

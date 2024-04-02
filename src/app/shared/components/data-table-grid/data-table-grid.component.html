@@ -21,16 +21,28 @@
         <th *ngIf="header.shown" role="columnheader"
             class="w-28 whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
           <div class="flex flex-row" *ngIf="header.filter.searchable; else searchDefaultTemplate">
-            <input [id]="header.id + 'FilterId'" tabindex="0" aria-label="Enter first name" type="text"
-                   class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+            <ng-container *ngIf="header.filter.searchType == SearchType.TEXT; else enumFilerTemplate">
+              <input (input)="onTextChange($event)" [(ngModel)]="criteria[header.id]" [id]="header.id + 'FilterId'"
+                     tabindex="0" aria-label="Enter first name" type="text"
+                     class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
                  focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white"
-                   placeholder="{{header.name}}"/>
+                     placeholder="{{header.name}}"/>
+            </ng-container>
+            <ng-template #enumFilerTemplate>
+              <input (input)="onTextChange($event)" [(ngModel)]="header.filter.value" [id]="header.id + 'FilterId'"
+                     tabindex="0" aria-label="Enter first name" type="text"
+                     class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+                 focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white"
+                     placeholder="{{header.name}}"/>
+            </ng-template>
             <div class="flex flex-row pl-2" *ngIf="header.filter.searchType == SearchType.ENUM">
               <button (click)="menus.triggerMenu()">
                 <ng-icon [id]="header.id + 'FilterTriggerId'" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
               </button>
               <app-checked-context-menu #menus
-                                        (checkedRowsEmitter)="onEnumFilter($event)"
+                                        (checkedRowsEmitter)="onEnumFilter($event);
+                                        header.filter.value = contextMenuToInputField(menus.checkedRows);
+                                        criteria[header.id] = contextMenuToEnum(menus.checkedRows);"
                                         [key]="header.id"
                                         [elementId]="header.id + 'FilterMenuId'"
                                         [triggerId]="header.id + 'FilterTriggerId'"
