@@ -47,7 +47,8 @@ export class DataTableGridComponent {
   @Output()
   protected filterEmitter: EventEmitter<void> = new EventEmitter<void>();
 
-  protected onEnumFilter(value: Array<CheckedContextMenu<any>>) {
+  protected onEnumFilter(id: string, value: Array<CheckedContextMenu<any>>) {
+    this.criteria[id] = value.map(it => it.value);
     this.filterEmitter.emit()
   }
 
@@ -68,16 +69,13 @@ export class DataTableGridComponent {
     this.checkedRowsEmitter.emit(this.checkedRows);
   }
 
-  protected onTextChange(event: any) {
+  protected onTextChange(id: string, input: any) {
+    this.criteria[id] = input;
     this.filterEmitter.emit();
   }
 
   protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
     return menus.map(value => value?.name ?? value).join(', ');
-  }
-
-  protected contextMenuToEnum(menus: CheckedContextMenu<any>[]) {
-    return menus.map(value => value?.value);
   }
 
 }

@@ -74,7 +74,7 @@ export class HttpService {
     let params = new HttpParams();
 
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key] == "") {
+      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key] != "") {
         if (Array.isArray(obj[key])) {
           obj[key].forEach((value: any) => {
             params = params.append(key, value.toString());
