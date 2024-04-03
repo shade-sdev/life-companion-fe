@@ -37,14 +37,12 @@ export class UserListComponent implements OnInit {
   }
 
   public onFilter() {
-    console.log(this.personSearchCriteria);
     this.personService.searchPersons(this.personService.objectToHttpParams(this.personSearchCriteria))
       .subscribe({
         next: value => {
           this.persons = value.elements;
         }
       })
-
   }
 
   headers: Array<Header> = [
