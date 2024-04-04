@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ContextMenuComponent} from "../context-menu/context-menu.component";
@@ -7,6 +7,7 @@ import {Header, SearchType} from "../../models/common/table-model";
 import {NgForOf, NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {CheckedContextMenu} from "../../models/common/checked-context-menu";
+import {PageNavigate} from "../../models/common/pageable";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -41,15 +42,29 @@ export class DataTableGridComponent {
   @Input()
   criteria: any;
 
+  @Input()
+  pageSize: number = 10;
+
+  @Input()
+  maxPageNumber: number = 0;
+
+  pageNumber: number = 0;
+
   @Output()
   protected checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   @Output()
-  protected filterEmitter: EventEmitter<void> = new EventEmitter<void>();
+  protected filterEmitter: EventEmitter<PageNavigate> = new EventEmitter<PageNavigate>();
+
+  @Output()
+  scrolledToBottom: EventEmitter<PageNavigate> = new EventEmitter<PageNavigate>();
+
+  private bottomReached = false;
 
   protected onEnumFilter(id: string, value: Array<CheckedContextMenu<any>>) {
     this.criteria[id] = value.map(it => it.value);
-    this.filterEmitter.emit()
+    this.resetPageNavigate();
+    this.filterEmitter.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
   }
 
   protected onCheckboxChange(event: any, row: any) {
@@ -71,7 +86,33 @@ export class DataTableGridComponent {
 
   protected onTextChange(id: string, input: any) {
     this.criteria[id] = input;
-    this.filterEmitter.emit();
+    this.resetPageNavigate();
+    this.filterEmitter.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
+  }
+
+  @HostListener('scroll', ['$event'])
+  onScroll(event: Event) {
+    const target = event.target as HTMLElement;
+    const scrollPosition = target.scrollTop + target.clientHeight;
+    const maxScroll = target.scrollHeight;
+    const scrollThreshold = 50;
+
+    if (!this.bottomReached && maxScroll - scrollPosition < scrollThreshold) {
+      this.bottomReached = true;
+
+      if (this.maxPageNumber >= this.pageNumber && this.data.length != 0) {
+        this.pageNumber = this.pageNumber + 1;
+        this.scrolledToBottom.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
+      }
+
+    } else if (maxScroll - scrollPosition >= scrollThreshold) {
+      this.bottomReached = false;
+    }
+  }
+
+  protected resetPageNavigate() {
+    this.pageNumber = 0;
+    this.pageSize = 10;
   }
 
   protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {

@@ -2,5 +2,7 @@
                      [data]="persons"
                      [headers]="headers"
                      [criteria]="personSearchCriteria"
-                     (filterEmitter)="onFilter()">
+                     [maxPageNumber]="maxPageNumber"
+                     (filterEmitter)="onFilter($event)"
+                     (scrolledToBottom)="callService($event)">
 </app-data-table-grid>

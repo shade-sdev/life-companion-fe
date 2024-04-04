@@ -3,7 +3,8 @@ import {DataTableGridComponent} from "../../../../shared/components/data-table-g
 import {ALL, Header, SearchType} from "../../../../shared/models/common/table-model";
 import {PersonSearchCriteria} from "../../../../shared/models/person/person-search-criteria";
 import {AgeGroup, Gender, Person} from "../../../../shared/models/person/person";
-import {PersonServiceService} from "../../services/person-service.service";
+import {PersonService} from "../../services/person.service";
+import {PageNavigate} from "../../../../shared/models/common/pageable";
 
 
 @Component({
@@ -12,7 +13,7 @@ import {PersonServiceService} from "../../services/person-service.service";
   imports: [
     DataTableGridComponent
   ],
-  providers: [PersonServiceService],
+  providers: [PersonService],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
@@ -20,27 +21,38 @@ export class UserListComponent implements OnInit {
 
   @ViewChild("userTableGrid") userTableGrid: DataTableGridComponent = new DataTableGridComponent();
 
-  personSearchCriteria = new PersonSearchCriteria();
+  public personSearchCriteria = new PersonSearchCriteria();
 
-  persons: Array<Person> = [];
+  public persons: Array<Person> = [];
 
-  constructor(private personService: PersonServiceService) {
+  public maxPageNumber: number = 0;
+
+  constructor(private personService: PersonService) {
   }
 
   ngOnInit(): void {
-    this.personService.searchPersons(this.personService.objectToHttpParams(this.personSearchCriteria))
-      .subscribe({
-        next: value => {
-          this.persons = value.elements;
-        }
-      })
+    this.callService({
+      pageNumber: 0,
+      pageSize: 10
+    });
   }
 
-  public onFilter() {
-    this.personService.searchPersons(this.personService.objectToHttpParams(this.personSearchCriteria))
+  public onFilter(pageNavigate: PageNavigate) {
+    this.persons = [];
+    this.callService(pageNavigate);
+  }
+
+  public callService(pageNavigate: PageNavigate) {
+    const updatedCriteria = {
+      ...this.personSearchCriteria,
+      pageNumber: pageNavigate.pageNumber,
+      pageSize: pageNavigate.pageSize
+    };
+    this.personService.searchPersons(updatedCriteria)
       .subscribe({
         next: value => {
-          this.persons = value.elements;
+          this.persons = [...this.persons, ...value.elements];
+          this.maxPageNumber = value.totalPages;
         }
       })
   }

@@ -13,13 +13,13 @@ export class HttpService {
 
   protected getEntity<T>(
     path: string,
-    params?: HttpParams,
+    params?: any,
     headers?: HttpHeaders
   ): Observable<T> {
     const url = `${this.baseUrl}${path}`;
     const options = {
       headers: headers ?? new HttpHeaders(),
-      params: params ?? new HttpParams(),
+      params: this.objectToHttpParams(params) ?? new HttpParams(),
     };
 
     return this.httpClient.get<T>(url, options);
@@ -70,11 +70,11 @@ export class HttpService {
     return this.httpClient.delete<T>(url, options);
   }
 
-  public objectToHttpParams(obj: any): HttpParams {
+  private objectToHttpParams(obj: any): HttpParams {
     let params = new HttpParams();
 
     for (const key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key] != "") {
+      if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key]?.length != 0) {
         if (Array.isArray(obj[key])) {
           obj[key].forEach((value: any) => {
             params = params.append(key, value.toString());
@@ -84,8 +84,6 @@ export class HttpService {
         }
       }
     }
-    params = params.set("pageNumber", 0);
-    params = params.set("pageSize", 100);
     return params;
   }
 }
