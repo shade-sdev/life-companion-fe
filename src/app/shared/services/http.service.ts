@@ -85,7 +85,7 @@ export class HttpService {
       }
     }
     params = params.set("pageNumber", 0);
-    params = params.set("pageSize", 10);
+    params = params.set("pageSize", 100);
     return params;
   }
 }
