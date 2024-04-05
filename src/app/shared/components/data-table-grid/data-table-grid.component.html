@@ -1,8 +1,9 @@
-<div class="min-w-full mx-auto bg-white dark:bg-gray-800 shadow rounded max-h-dvh overflow-y-auto"
+<div
+  class="min-w-full mx-auto bg-white dark:bg-[#0b0b0e] shadow rounded max-h-dvh overflow-y-auto dark:border-y-[#1b1c20] border-t-2"
      style="height: calc(100vh - 10rem);" (scroll)="onScroll($event)">
 
   <table class="min-w-full bg-transparent dark:bg-transparent ">
-    <thead class="sticky top-0 bg-white dark:bg-gray-800">
+    <thead class="sticky top-0 bg-white dark:bg-[#0b0b0e]">
     <tr class="h-14 border-gray-300 dark:border-gray-700">
       <th
         class="w-10 whitespace-nowrap pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
@@ -16,7 +17,7 @@
         </th>
       </ng-container>
     </tr>
-    <tr class="w-full h-14 border-gray-300 dark:border-gray-700 border-b py-8">
+    <tr class="w-full h-14 border-gray-300 dark:border-y-[#131317] border-b py-8">
       <th class="pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
       </th>
       <ng-container *ngFor="let header of headers">
@@ -26,20 +27,21 @@
             <ng-container *ngIf="header.filter.searchType == SearchType.TEXT; else enumFilerTemplate">
               <input #fieldInput (input)="onTextChange(header.id, fieldInput.value)" [id]="header.id + 'FilterId'"
                      tabindex="0" aria-label="Enter first name" type="text"
-                     class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
-                 focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white"
+                     class="border border-gray-300 dark:border-[#1d1d1d] py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+                 focus:outline-none dark:bg-[#111214] bg-gray-200 text-gray-800 dark:text-white"
                      placeholder="{{header.name}}"/>
             </ng-container>
             <ng-template #enumFilerTemplate>
               <input [(ngModel)]="header.filter.value" [id]="header.id + 'FilterId'"
                      tabindex="0" aria-label="Enter first name" type="text"
-                     class="border border-gray-300 dark:border-gray-700 py-1.5 pl-2 w-32 shadow-sm rounded text-sm
-                 focus:outline-none dark:bg-gray-700 bg-gray-200 text-gray-800 dark:text-white"
+                     class="border border-gray-300 dark:border-[#1d1d1d] py-1.5 pl-2 w-32 shadow-sm rounded text-sm
+                 focus:outline-none dark:bg-[#111214] bg-gray-200 text-gray-800 dark:text-white" disabled
                      placeholder="{{header.name}}"/>
             </ng-template>
             <div class="flex flex-row pl-2" *ngIf="header.filter.searchType == SearchType.ENUM">
               <button (click)="menus.triggerMenu()">
-                <ng-icon [id]="header.id + 'FilterTriggerId'" [name]="'heroFunnelSolid'" size="1rem"></ng-icon>
+                <ng-icon class="text-[#3d3d3d" [id]="header.id + 'FilterTriggerId'" [name]="'heroFunnelSolid'"
+                         size="1rem"></ng-icon>
               </button>
               <app-checked-context-menu #menus
                                         (checkedRowsEmitter)="onEnumFilter(header.id, $event);
@@ -63,7 +65,7 @@
     </thead>
     <tbody>
     <ng-container *ngFor="let row of data">
-      <tr class="h-16 border-gray-300 dark:border-gray-700 border-b">
+      <tr class="h-16 border-gray-300 dark:border-[#131317] border-b">
         <td
           class="pl-8 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
           <input [checked]="selectAll" (change)="onCheckboxChange($event, row)"
@@ -87,7 +89,7 @@
     </ng-container>
     </tbody>
   </table>
-  <div class="flex flex-row p-4 justify-end bg-white dark:bg-gray-800 absolute bottom-0 w-full left-0">
+  <div class="flex flex-row p-4 justify-end bg-white dark:bg-[#0b0b0e] absolute bottom-0 w-full left-0">
     <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">1 - 20 of 60</p>
     <div class="flex flex-row justify-center">
       <button
