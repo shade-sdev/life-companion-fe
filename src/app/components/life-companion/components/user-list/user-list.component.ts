@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {DataTableGridComponent} from "../../../../shared/components/data-table-grid/data-table-grid.component";
 import {ALL, Header, SearchType} from "../../../../shared/models/common/table-model";
 import {PersonSearchCriteria} from "../../../../shared/models/person/person-search-criteria";
-import {AgeGroup, Gender, Person} from "../../../../shared/models/person/person";
+import {AgeGroup, Gender} from "../../../../shared/models/person/person";
 import {PersonService} from "../../services/person.service";
-import {PageNavigate} from "../../../../shared/models/common/pageable";
+import {Observable} from "rxjs";
+import {PersonSearchResult} from "../../../../shared/models/person/person-search-result";
 
 
 @Component({
@@ -17,44 +18,18 @@ import {PageNavigate} from "../../../../shared/models/common/pageable";
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
 
   @ViewChild("userTableGrid") userTableGrid: DataTableGridComponent = new DataTableGridComponent();
 
   public personSearchCriteria = new PersonSearchCriteria();
 
-  public persons: Array<Person> = [];
-
-  public maxPageNumber: number = 0;
-
   constructor(private personService: PersonService) {
+    this.callService = this.callService.bind(this);
   }
 
-  ngOnInit(): void {
-    this.callService({
-      pageNumber: 0,
-      pageSize: 10
-    });
-  }
-
-  public onFilter(pageNavigate: PageNavigate) {
-    this.persons = [];
-    this.callService(pageNavigate);
-  }
-
-  public callService(pageNavigate: PageNavigate) {
-    const updatedCriteria = {
-      ...this.personSearchCriteria,
-      pageNumber: pageNavigate.pageNumber,
-      pageSize: pageNavigate.pageSize
-    };
-    this.personService.searchPersons(updatedCriteria)
-      .subscribe({
-        next: value => {
-          this.persons = [...this.persons, ...value.elements];
-          this.maxPageNumber = value.totalPages;
-        }
-      })
+  public callService(criteria: PersonSearchCriteria): Observable<PersonSearchResult> {
+    return this.personService.searchPersons(criteria);
   }
 
   headers: Array<Header> = [

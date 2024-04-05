@@ -1,8 +1,5 @@
 <app-data-table-grid #userTableGrid
-                     [data]="persons"
+                     [loadDataFunction]="callService"
                      [headers]="headers"
-                     [criteria]="personSearchCriteria"
-                     [maxPageNumber]="maxPageNumber"
-                     (filterEmitter)="onFilter($event)"
-                     (scrolledToBottom)="callService($event)">
+                     [criteria]="personSearchCriteria">
 </app-data-table-grid>

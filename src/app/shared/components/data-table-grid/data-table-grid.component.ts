@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {NgIcon} from "@ng-icons/core";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ContextMenuComponent} from "../context-menu/context-menu.component";
@@ -7,7 +7,7 @@ import {Header, SearchType} from "../../models/common/table-model";
 import {NgForOf, NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {CheckedContextMenu} from "../../models/common/checked-context-menu";
-import {PageNavigate} from "../../models/common/pageable";
+import {Observable, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-data-table-grid',
@@ -25,46 +25,70 @@ import {PageNavigate} from "../../models/common/pageable";
   templateUrl: './data-table-grid.component.html',
   styleUrl: './data-table-grid.component.css'
 })
-export class DataTableGridComponent {
+export class DataTableGridComponent implements OnDestroy, OnInit {
 
   protected readonly SearchType = SearchType;
 
-  public checkedRows: Array<any> = [];
-
-  protected selectAll: boolean = false;
+  @Input()
+  public headers: Array<Header> = [];
 
   @Input()
-  headers: Array<Header> = [];
+  public criteria!: any;
 
   @Input()
-  data: Array<any> = []
+  public pageSize: number = 10;
 
-  @Input()
-  criteria: any;
-
-  @Input()
-  pageSize: number = 10;
-
-  @Input()
-  maxPageNumber: number = 0;
-
-  pageNumber: number = 0;
+  @Input() public loadDataFunction!: (criteria: any) => Observable<any>;
 
   @Output()
   protected checkedRowsEmitter: EventEmitter<any[]> = new EventEmitter<any[]>();
 
-  @Output()
-  protected filterEmitter: EventEmitter<PageNavigate> = new EventEmitter<PageNavigate>();
+  public checkedRows: Array<any> = [];
 
-  @Output()
-  scrolledToBottom: EventEmitter<PageNavigate> = new EventEmitter<PageNavigate>();
+  protected data: Array<any> = []
+
+  protected selectAll: boolean = false;
+
+  private maxPageNumber: number | undefined = 0;
+
+  private pageNumber: number = 0;
 
   private bottomReached = false;
+
+  private subscription: Subscription | undefined;
+
+  ngOnInit(): void {
+    this.loadData()
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  public loadData() {
+    const updatedCriteria = {
+      ...this.criteria,
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize
+    };
+    if (this.loadDataFunction) {
+      this.subscription = this.loadDataFunction(updatedCriteria)
+        .subscribe({
+          next: value => {
+            this.data = [...this.data, ...value.elements];
+            this.maxPageNumber = value.totalPages;
+          }
+        });
+    } else {
+      console.error('No loadDataFunction provided');
+    }
+  }
 
   protected onEnumFilter(id: string, value: Array<CheckedContextMenu<any>>) {
     this.criteria[id] = value.map(it => it.value);
     this.resetPageNavigate();
-    this.filterEmitter.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
   }
 
   protected onCheckboxChange(event: any, row: any) {
@@ -87,7 +111,17 @@ export class DataTableGridComponent {
   protected onTextChange(id: string, input: any) {
     this.criteria[id] = input;
     this.resetPageNavigate();
-    this.filterEmitter.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
+  }
+
+  protected resetPageNavigate() {
+    this.pageNumber = 0;
+    this.pageSize = 10;
+    this.data = [];
+    this.loadData();
+  }
+
+  protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
+    return menus.map(value => value?.name ?? value).join(', ');
   }
 
   @HostListener('scroll', ['$event'])
@@ -100,23 +134,14 @@ export class DataTableGridComponent {
     if (!this.bottomReached && maxScroll - scrollPosition < scrollThreshold) {
       this.bottomReached = true;
 
-      if (this.maxPageNumber >= this.pageNumber && this.data.length != 0) {
+      if (this.maxPageNumber! >= this.pageNumber && this.data.length != 0) {
         this.pageNumber = this.pageNumber + 1;
-        this.scrolledToBottom.emit({pageSize: this.pageSize, pageNumber: this.pageNumber});
+        this.loadData();
       }
 
     } else if (maxScroll - scrollPosition >= scrollThreshold) {
       this.bottomReached = false;
     }
-  }
-
-  protected resetPageNavigate() {
-    this.pageNumber = 0;
-    this.pageSize = 10;
-  }
-
-  protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
-    return menus.map(value => value?.name ?? value).join(', ');
   }
 
 }
