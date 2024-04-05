@@ -1,5 +1,5 @@
 <div
-  class="min-w-full mx-auto bg-white dark:bg-[#0b0b0e] shadow rounded max-h-dvh overflow-y-auto dark:border-y-[#1b1c20] border-t-2"
+  class="min-w-full mx-auto bg-white dark:bg-[#0b0b0e] shadow rounded max-h-dvh overflow-y-auto dark:border-y-[#1b1c20] border-t"
      style="height: calc(100vh - 10rem);" (scroll)="onScroll($event)">
 
   <table class="min-w-full bg-transparent dark:bg-transparent ">
@@ -90,7 +90,9 @@
     </tbody>
   </table>
   <div class="flex flex-row p-4 justify-end bg-white dark:bg-[#0b0b0e] absolute bottom-0 w-full left-0">
-    <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">1 - 20 of 60</p>
+    <p class="text-base text-gray-600 dark:text-gray-400"
+       id="page-view">{{ ((pageNumber == 0 ? 1 : pageNumber) * numberOfElements) - (pageSize - 1) }}
+      - {{ (pageNumber == 0 ? 1 : pageNumber) * pageSize }} of {{ totalElements }}</p>
     <div class="flex flex-row justify-center">
       <button
         class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded focus:outline-none focus:ring-2 focus:ring-gray-500 "

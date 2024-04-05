@@ -49,9 +49,13 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
 
   protected selectAll: boolean = false;
 
-  private maxPageNumber: number | undefined = 0;
+  protected totalElements: number = 0;
 
-  private pageNumber: number = 0;
+  protected numberOfElements: number = 0;
+
+  protected pageNumber: number = 0;
+
+  private maxPageNumber: number | undefined = 0;
 
   private bottomReached = false;
 
@@ -78,7 +82,9 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
         .subscribe({
           next: value => {
             this.data = [...this.data, ...value.elements];
+            this.totalElements = value.totalElements;
             this.maxPageNumber = value.totalPages;
+            this.numberOfElements = value.numberOfElements;
           }
         });
     } else {
