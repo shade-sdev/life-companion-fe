@@ -16,6 +16,7 @@ export class HttpService {
     params?: any,
     headers?: HttpHeaders
   ): Observable<T> {
+    console.log(environment.production);
     const url = `${this.baseUrl}${path}`;
     const options = {
       headers: headers ?? new HttpHeaders(),
