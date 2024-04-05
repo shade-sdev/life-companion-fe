@@ -1,5 +1,6 @@
-<div class="min-w-full mx-auto container bg-white dark:bg-gray-800 shadow rounded max-h-dvh overflow-y-auto"
+<div class="min-w-full mx-auto bg-white dark:bg-gray-800 shadow rounded max-h-dvh overflow-y-auto"
      style="height: calc(100vh - 10rem);" (scroll)="onScroll($event)">
+
   <table class="min-w-full bg-transparent dark:bg-transparent ">
     <thead class="sticky top-0 bg-white dark:bg-gray-800">
     <tr class="h-14 border-gray-300 dark:border-gray-700">
@@ -86,7 +87,7 @@
     </ng-container>
     </tbody>
   </table>
-  <div class="flex flex-row p-4 justify-end sticky bottom-0 bg-white dark:bg-gray-800">
+  <div class="flex flex-row p-4 justify-end bg-white dark:bg-gray-800 absolute bottom-0 w-full left-0">
     <p class="text-base text-gray-600 dark:text-gray-400" id="page-view">1 - 20 of 60</p>
     <div class="flex flex-row justify-center">
       <button

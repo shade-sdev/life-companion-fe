@@ -7,7 +7,7 @@ export class Pageable {
 export class PageNavigate {
   direction?: Direction;
   pageNumber: number = 0;
-  pageSize: number = 10;
+  pageSize: number = 0;
 }
 
 export enum Direction {
