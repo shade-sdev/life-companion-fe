@@ -19,7 +19,7 @@ export class SideBarService {
 
   private getSideBarItems(): Sidebar {
     return {
-      appIconUrl: 'https://cdn-icons-png.flaticon.com/128/9436/9436365.png',
+      appIconUrl: 'https://cdn.discordapp.com/avatars/161191902866046977/fb87cd639c013a3b6c8fdf1ec1c53094.png',
       sidebars: [
         {
           title: 'Dashboard',
