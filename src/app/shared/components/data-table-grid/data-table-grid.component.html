@@ -1,5 +1,5 @@
 <div
-  class="min-w-full mx-auto bg-white dark:bg-[#0b0b0e] shadow rounded max-h-dvh overflow-y-auto dark:border-y-[#1b1c20] border-t"
+  class="min-w-full mx-auto bg-white dark:bg-[#0b0b0e] shadow rounded max-h-dvh overflow-y-scroll dark:border-y-[#1b1c20] border-t"
      style="height: calc(100vh - 10rem);" (scroll)="onScroll($event)">
 
   <table class="min-w-full bg-transparent dark:bg-transparent ">
@@ -12,17 +12,17 @@
       </th>
       <ng-container *ngFor="let header of headers">
         <th *ngIf="header.shown" role="columnheader"
-            class="w-28 whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
+            class="whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal w-48 !important">
           {{ header.name }}
         </th>
       </ng-container>
     </tr>
     <tr class="w-full h-14 border-gray-300 dark:border-y-[#131317] border-b py-8">
-      <th class="pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
+      <th class="w-10 pl-8 text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal leading-4">
       </th>
       <ng-container *ngFor="let header of headers">
         <th *ngIf="header.shown" role="columnheader"
-            class="w-28 whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal">
+            class="whitespace-nowrap text-gray-600 dark:text-gray-400 font-normal text-left text-sm tracking-normal w-48 !important">
           <div class="flex flex-row" *ngIf="header.filter.searchable; else searchDefaultTemplate">
             <ng-container *ngIf="header.filter.searchType == SearchType.TEXT; else enumFilerTemplate">
               <input #fieldInput (input)="onTextChange(header.id, fieldInput.value)" [id]="header.id + 'FilterId'"
@@ -67,7 +67,7 @@
     <ng-container *ngFor="let row of data">
       <tr class="h-16 border-gray-300 dark:border-[#131317] border-b">
         <td
-          class="pl-8 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+          class="pl-8 text-left whitespace-no-wrap text-sm text-gray-800 dark:text-gray-100 tracking-normal leading-4 w-10">
           <input [checked]="selectAll" (change)="onCheckboxChange($event, row)"
                  placeholder="check box"
                  type="checkbox"
@@ -76,7 +76,7 @@
         </td>
         <ng-container *ngFor="let header of headers">
           <td *ngIf="header.shown"
-              class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4">
+              class="text-sm whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4 w-48 !important">
             <ng-container *ngIf="header?.filter?.searchType == SearchType.ENUM; else defaultCell">
               {{ header.filter.translateKey + row[header.id]  | translate }}
             </ng-container>
