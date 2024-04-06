@@ -140,7 +140,7 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
     if (!this.bottomReached && maxScroll - scrollPosition < scrollThreshold) {
       this.bottomReached = true;
 
-      if (this.maxPageNumber! >= this.pageNumber && this.data.length != 0) {
+      if (this.maxPageNumber! > this.pageNumber && this.data.length != 0) {
         this.pageNumber = this.pageNumber + 1;
         this.loadData();
       }
