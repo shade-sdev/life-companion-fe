@@ -43,7 +43,7 @@ export class UserListComponent {
     },
     {
       id: "firstName",
-      name: "FirstName",
+      name: "First name",
       shown: true,
       filter: {
         searchable: true,
@@ -52,7 +52,7 @@ export class UserListComponent {
     },
     {
       id: "lastName",
-      name: "LastName",
+      name: "Last name",
       shown: true,
       filter: {
         searchable: true,

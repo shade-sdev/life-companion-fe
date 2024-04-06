@@ -20,7 +20,7 @@ export class FormUtil {
     const isError = this.isFormPropertyError(formControlName);
 
     return {
-      'border-gray-300 dark:border-gray-700': isUnTouched,
+      'border-gray-300 dark:border-[#1b1c20]': isUnTouched,
       'border-red-700': isError,
       'border-green-800': !isUnTouched && !isError
     };
