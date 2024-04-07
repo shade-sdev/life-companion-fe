@@ -7,10 +7,10 @@ import {PersonSearchCriteria} from "../../../shared/models/person/person-search-
 @Injectable()
 export class PersonService extends HttpService {
 
-  private readonly personBaseUrl = "/persons"
+  private readonly PERSON_BASE_URL = "/persons"
 
   public searchPersons(criteria: PersonSearchCriteria): Observable<PersonSearchResult> {
-    return this.getEntity<PersonSearchResult>(this.personBaseUrl, criteria);
+    return this.getEntity<PersonSearchResult>(this.PERSON_BASE_URL, criteria);
   }
 
 }

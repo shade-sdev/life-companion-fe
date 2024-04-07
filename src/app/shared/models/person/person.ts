@@ -1,7 +1,5 @@
-import {v4 as uuidv4} from 'uuid';
-
 export class Person {
-  id?: typeof uuidv4;
+  id?: Uint8Array;
   picture?: string;
   firstName!: string;
   lastName!: string;

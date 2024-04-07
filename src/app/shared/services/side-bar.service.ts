@@ -36,6 +36,13 @@ export class SideBarService {
           icon: 'heroUserGroupSolid'
         },
         {
+          title: 'My Files',
+          url: '/my-files',
+          active: this.currentUrl.includes('my-files'),
+          authorities: [],
+          icon: 'heroFolderSolid'
+        },
+        {
           title: 'Setting',
           url: '/setting',
           active: this.currentUrl.includes('setting'),
