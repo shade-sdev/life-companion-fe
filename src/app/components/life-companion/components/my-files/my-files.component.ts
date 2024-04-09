@@ -23,21 +23,15 @@ export class MyFilesComponent implements OnInit {
   }
 
   downloadFile() {
-    this.fileService.downloadFile("26ded377-e8de-447b-8a14-834c5ceaecff").subscribe(
-      ({blob, fileName}: { blob: Blob, fileName: string }) => {
-        // Create a URL for the Blob and initiate download
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = fileName; // Use the provided file name
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      },
-      error => {
-        // Handle error
-        console.error('Error downloading file:', error);
-      }
-    );
+    this.fileService.downloadFile("26ded377-e8de-447b-8a14-834c5ceaecff").subscribe(blob => {
+      const url = window.URL.createObjectURL(blob.blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = blob.fileName; // Set your desired filename here
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
+
 }

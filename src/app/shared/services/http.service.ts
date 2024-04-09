@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment.development";
 
 @Injectable()
@@ -24,6 +24,29 @@ export class HttpService {
     };
 
     return this.httpClient.get<T>(url, options);
+  }
+
+  protected getResource(
+    path: string,
+    params?: any,
+    headers?: HttpHeaders
+  ): Observable<{ blob: Blob, fileName: string }> {
+    const url = `${this.baseUrl}${path}`;
+    return this.httpClient.get(url, {
+      headers: headers ?? new HttpHeaders(),
+      observe: 'response',
+      params: this.objectToHttpParams(params) ?? new HttpParams(),
+      responseType: 'blob',
+      reportProgress: true
+    }).pipe(
+      map((response: HttpResponse<Blob>) => {
+        const contentDispositionHeader = response.headers.get('Content-Disposition');
+        const fileNameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+        const matches = fileNameRegex.exec(contentDispositionHeader!);
+        const fileName = matches && matches.length > 1 ? matches[1].replace(/['"]/g, '') : 'file';
+        return {blob: new Blob([response.body!], {type: response.body!.type}), fileName: fileName};
+      })
+    );
   }
 
   protected postEntity<T>(
