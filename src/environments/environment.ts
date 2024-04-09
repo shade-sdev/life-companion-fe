@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  basePath: "https://test-bench.onrender.com",
-  baseApiPath: "https://test-bench.onrender.com/api/v1"
+  basePath: "http://165.232.173.128:8080/",
+  baseApiPath: "http://165.232.173.128:8080/api/v1"
 };
