@@ -4,13 +4,16 @@ import {UUID} from "../../../../shared/util/uuid";
 import {NgIcon} from "@ng-icons/core";
 import {UploadFileModalComponent} from "./modals/upload-file-modal/upload-file-modal.component";
 import {HttpEventType} from "@angular/common/http";
+import {TelegramFile} from "../../../../shared/models/file/telegram-file";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-my-files',
   standalone: true,
   imports: [
     NgIcon,
-    UploadFileModalComponent
+    UploadFileModalComponent,
+    NgForOf
   ],
   providers: [FileService],
   templateUrl: './my-files.component.html',
@@ -22,16 +25,14 @@ export class MyFilesComponent implements OnInit {
   constructor(private fileService: FileService) {
   }
 
+  public files: Array<TelegramFile> = [];
+
   public progress: number = 0;
 
   @ViewChild('uploadFileModal') uploadFileModalComponent!: UploadFileModalComponent;
 
   ngOnInit(): void {
-    this.fileService.searchFiles({pageNumber: 0, pageSize: 10}).subscribe({
-      next: value => {
-        console.log(value?.elements[0]?.id?.toString());
-      }
-    })
+    this.searchFiles();
   }
 
   uploadFile(file: File) {
@@ -41,6 +42,8 @@ export class MyFilesComponent implements OnInit {
           this.progress = Math.round(100 * event.loaded / event.total!);
         } else if (event.type === HttpEventType.Response) {
           this.progress = 0;
+          this.uploadFileModalComponent.closeModal();
+          this.searchFiles();
         }
       },
       error: err => {
@@ -49,8 +52,16 @@ export class MyFilesComponent implements OnInit {
     });
   }
 
-  downloadFile() {
-    this.fileService.downloadFile(UUID.fromString("0016613d-ed39-46e9-a519-fdec728d9083"))
+  searchFiles() {
+    this.fileService.searchFiles({pageNumber: 0, pageSize: 10}).subscribe({
+      next: value => {
+        this.files = value.elements;
+      }
+    })
+  }
+
+  downloadFile(id: UUID) {
+    this.fileService.downloadFile(id)
       .subscribe(blob => {
         const url = window.URL.createObjectURL(blob.blob);
         const a = document.createElement('a');

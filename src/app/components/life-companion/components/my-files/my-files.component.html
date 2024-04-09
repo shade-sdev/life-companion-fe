@@ -41,30 +41,32 @@
       role="list"
       class="divide-y divide-gray-100 dark:divide-life-300-dark mx-20 text-gray-700 dark:text-gray-100">
 
-      <li class="flex justify-between gap-x-6 py-5 font-medium">
-        <div class="flex flex-row items-center gap-x-4">
-          <input placeholder="check box" type="checkbox"
-                 class="mr-4 cursor-pointer w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
-          <img class="h-12 w-12 flex-none"
-               src="/assets/images/icons8_file_480px.png"
-               alt="">
-          <div class="min-w-0 flex-auto content-center">
-            <button (click)="downloadFile()" class="text-sm font-semibold leading-6">
-              Image.png
-            </button>
+      <ng-container *ngFor="let file of files">
+        <li class="flex justify-between gap-x-6 py-5 font-medium">
+          <div class="flex flex-row items-center gap-x-4">
+            <input placeholder="check box" type="checkbox"
+                   class="mr-4 cursor-pointer w-5 h-5 border rounded border-gray-400 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2  focus:ring-gray-400"/>
+            <img class="h-12 w-12 flex-none"
+                 src="/assets/images/icons8_file_480px.png"
+                 alt="">
+            <div class="min-w-0 flex-auto content-center">
+              <button (click)="downloadFile(file.id!)" class="text-sm font-semibold leading-6">
+                {{ file.fileName }}
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center gap-x-6">
-          <div class="min-w-0 flex-auto content-center">
-            <p class="text-sm leading-6">10 MB</p>
+          <div class="flex items-center gap-x-6">
+            <div class="min-w-0 flex-auto content-center">
+              <p class="text-sm leading-6">{{ file.fileSize }}</p>
+            </div>
           </div>
-        </div>
-        <div class="flex items-center gap-x-6">
-          <div class="min-w-0 flex-auto content-center">
-            <p class="text-sm leading-6">2023-01-23</p>
+          <div class="flex items-center gap-x-6">
+            <div class="min-w-0 flex-auto content-center">
+              <p class="text-sm leading-6">{{ file.uploadedDate }}</p>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
+      </ng-container>
 
     </ul>
   </div>
