@@ -1,5 +1,7 @@
+import {UUID} from "../../util/uuid";
+
 export class TelegramFile {
-  id?: Uint8Array;
+  id?: UUID;
   remoteId?: string;
   fileName?: string;
   uploadedDate?: Date;

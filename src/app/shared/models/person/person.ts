@@ -1,5 +1,7 @@
+import {UUID} from "../../util/uuid";
+
 export class Person {
-  id?: Uint8Array;
+  id?: UUID;
   picture?: string;
   firstName!: string;
   lastName!: string;

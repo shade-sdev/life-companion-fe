@@ -4,6 +4,7 @@ import {FileSearchCriteria} from "../../../shared/models/file/file-search-criter
 import {Observable} from "rxjs";
 import {FileSearchResult} from "../../../shared/models/file/file-search-result";
 import {HttpClient} from "@angular/common/http";
+import {UUID} from "../../../shared/util/uuid";
 
 @Injectable()
 export class FileService extends HttpService {
@@ -18,7 +19,7 @@ export class FileService extends HttpService {
     return this.getEntity<FileSearchResult>(this.FILE_BASE_URL, criteria);
   }
 
-  downloadFile(id: string): Observable<{ blob: Blob, fileName: string }> {
+  downloadFile(id: UUID): Observable<{ blob: Blob, fileName: string }> {
     return this.getResource(`${this.FILE_BASE_URL}/${id}/download`);
   }
 

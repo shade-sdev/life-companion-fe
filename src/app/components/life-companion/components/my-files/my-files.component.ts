@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FileService} from "../../services/file.service";
+import {UUID} from "../../../../shared/util/uuid";
 
 @Component({
   selector: 'app-my-files',
@@ -9,6 +10,7 @@ import {FileService} from "../../services/file.service";
   templateUrl: './my-files.component.html',
   styleUrl: './my-files.component.css'
 })
+
 export class MyFilesComponent implements OnInit {
 
   constructor(private fileService: FileService) {
@@ -17,21 +19,22 @@ export class MyFilesComponent implements OnInit {
   ngOnInit(): void {
     this.fileService.searchFiles({pageNumber: 0, pageSize: 10}).subscribe({
       next: value => {
-        console.log(value);
+        console.log(value?.elements[0]?.id?.toString());
       }
     })
   }
 
   downloadFile() {
-    this.fileService.downloadFile("26ded377-e8de-447b-8a14-834c5ceaecff").subscribe(blob => {
-      const url = window.URL.createObjectURL(blob.blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = blob.fileName; // Set your desired filename here
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-    });
+    this.fileService.downloadFile(UUID.fromString("26ded377-e8de-447b-8a14-834c5ceaecff"))
+      .subscribe(blob => {
+        const url = window.URL.createObjectURL(blob.blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = blob.fileName; // Set your desired filename here
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      });
   }
 
 }
