@@ -1,11 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FileService} from "../../services/file.service";
 import {UUID} from "../../../../shared/util/uuid";
+import {NgIcon} from "@ng-icons/core";
+import {UploadFileModalComponent} from "./modals/upload-file-modal/upload-file-modal.component";
+import {HttpEventType} from "@angular/common/http";
 
 @Component({
   selector: 'app-my-files',
   standalone: true,
-  imports: [],
+  imports: [
+    NgIcon,
+    UploadFileModalComponent
+  ],
   providers: [FileService],
   templateUrl: './my-files.component.html',
   styleUrl: './my-files.component.css'
@@ -16,6 +22,10 @@ export class MyFilesComponent implements OnInit {
   constructor(private fileService: FileService) {
   }
 
+  public progress: number = 0;
+
+  @ViewChild('uploadFileModal') uploadFileModalComponent!: UploadFileModalComponent;
+
   ngOnInit(): void {
     this.fileService.searchFiles({pageNumber: 0, pageSize: 10}).subscribe({
       next: value => {
@@ -24,8 +34,23 @@ export class MyFilesComponent implements OnInit {
     })
   }
 
+  uploadFile(file: File) {
+    this.fileService.uploadFile('file', file).subscribe({
+      next: event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total!);
+        } else if (event.type === HttpEventType.Response) {
+          this.progress = 0;
+        }
+      },
+      error: err => {
+        console.log('Could not upload file', err)
+      }
+    });
+  }
+
   downloadFile() {
-    this.fileService.downloadFile(UUID.fromString("26ded377-e8de-447b-8a14-834c5ceaecff"))
+    this.fileService.downloadFile(UUID.fromString("0016613d-ed39-46e9-a519-fdec728d9083"))
       .subscribe(blob => {
         const url = window.URL.createObjectURL(blob.blob);
         const a = document.createElement('a');

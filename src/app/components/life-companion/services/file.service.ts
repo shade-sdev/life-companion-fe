@@ -9,7 +9,7 @@ import {UUID} from "../../../shared/util/uuid";
 @Injectable()
 export class FileService extends HttpService {
 
-  private readonly FILE_BASE_URL = "/telegram-files"
+  public readonly FILE_BASE_URL = "/telegram-files"
 
   constructor(private http: HttpClient) {
     super(http);
@@ -20,7 +20,13 @@ export class FileService extends HttpService {
   }
 
   downloadFile(id: UUID): Observable<{ blob: Blob, fileName: string }> {
-    return this.getResource(`${this.FILE_BASE_URL}/${id}/download`);
+    return this.downloadResource(`${this.FILE_BASE_URL}/${id}/download`);
+  }
+
+  uploadFile(key: string, file: File) {
+    const formData = new FormData();
+    formData.append(key, file, file.name);
+    return this.uploadResource(`${this.FILE_BASE_URL}/upload`, formData);
   }
 
 }

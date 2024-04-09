@@ -14,6 +14,8 @@ import {
   heroFunnelSolid,
   heroHomeSolid,
   heroMagnifyingGlassSolid,
+  heroMinusCircleSolid,
+  heroPlusCircleSolid,
   heroSquares2x2Solid,
   heroStarSolid,
   heroUserCircleSolid,
@@ -64,7 +66,9 @@ import {
       heroChevronRightSolid,
       heroChevronLeftSolid,
       heroFunnelSolid,
-      heroFolderSolid
+      heroFolderSolid,
+      heroPlusCircleSolid,
+      heroMinusCircleSolid
     })
   ],
   exports: [NgIconsModule]

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {environment} from "../../../environments/environment.development";
 
@@ -26,7 +26,7 @@ export class HttpService {
     return this.httpClient.get<T>(url, options);
   }
 
-  protected getResource(
+  protected downloadResource(
     path: string,
     params?: any,
     headers?: HttpHeaders
@@ -47,6 +47,21 @@ export class HttpService {
         return {blob: new Blob([response.body!], {type: response.body!.type}), fileName: fileName};
       })
     );
+  }
+
+  protected uploadResource(
+    path: string,
+    body: any,
+    params?: any,
+    headers?: HttpHeaders
+  ): Observable<HttpEvent<any>> {
+    const url = `${this.baseUrl}${path}`;
+    return this.httpClient.post<any>(url, body, {
+      headers: headers ?? new HttpHeaders(),
+      params: this.objectToHttpParams(params) ?? new HttpParams(),
+      reportProgress: true,
+      observe: 'events'
+    });
   }
 
   protected postEntity<T>(

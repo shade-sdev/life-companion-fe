@@ -2,6 +2,7 @@ import {PageNavigate} from "../common/pageable";
 
 export class FileSearchCriteria extends PageNavigate {
   fileName?: string;
+  fileSize?: string;
   date?: Date;
   sortBy?: FileSortBy;
 }

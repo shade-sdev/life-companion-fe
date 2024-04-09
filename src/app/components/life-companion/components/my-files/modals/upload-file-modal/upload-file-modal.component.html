@@ -1,0 +1,86 @@
+<app-modal #uploadFileModal>
+
+  <div class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0 overflow-y-auto"
+       id="modal">
+    <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+      <div
+        class="relative p-4 md:p-8 bg-white dark:bg-life-border-dark dark:border-gray-700 shadow-md rounded border border-gray-400">
+        <div tabindex="0" aria-label="upload icon" role="img"
+             class="focus:outline-none w-full flex justify-center text-gray-600 dark:text-gray-400 mb-4">
+          <img class="dark:hidden"
+               src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg1.svg" alt="icon"/>
+          <img class="hidden dark:block"
+               src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg1dark.svg" alt="icon"/>
+
+        </div>
+        <button (click)="closeModal()"
+                class="focus:outline-none rounded-md cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 dark:text-gray-400 transition duration-150 ease-in-out"
+                aria-label="Close" role="button">
+          <ng-icon [name]="'heroXMarkSolid'" size="1.3rem"></ng-icon>
+
+        </button>
+        <h1 tabindex="0"
+            class="focus:outline-none text-center text-gray-800 dark:text-gray-100 font-lg font-bold tracking-normal leading-tight mb-4">
+          Upload Files</h1>
+        <div
+          class="flex flex-col items-center justify-center w-full mb-8 border border-double border-indigo-700 rounded-lg py-8">
+          <div tabindex="0" aria-label="drag drop icon" role="img"
+               class="focus:outline-none cursor-pointer mb-5 text-indigo-700 dark:text-indigo-600">
+            <img class="dark:hidden"
+                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg3.svg" alt="icon"/>
+            <img class="hidden dark:block"
+                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg3dark.svg"
+                 alt="icon"/>
+
+          </div>
+          <p tabindex="0"
+             class="focus:outline-none text-base font-normal tracking-normal text-gray-800 dark:text-gray-100 text-center">
+            Drag and drop here</p>
+          <p class="text-base font-normal tracking-normal text-gray-800 dark:text-gray-100 text-center my-1">or</p>
+          <label for="file" tabindex="0"
+                 class="focus:outline-none cursor-pointer text-base font-normal tracking-normal text-indigo-700 dark:text-indigo-600 text-center">
+            browse </label>
+          <form [formGroup]="uploadForm">
+            <input type="file" class="hidden" formControlName="file" (change)="onFileSelected($event)" id="file"/>
+          </form>
+        </div>
+        <div *ngIf="uploadForm?.get('file')?.value" class="flex justify-between items-center w-full mb-5">
+          <div class="items-center text-gray-600 dark:text-gray-400 flex">
+            <img class="dark:hidden"
+                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg4.svg" alt="icon"/>
+            <img class="hidden dark:block"
+                 src="https://tuk-cdn.s3.amazonaws.com/can-uploader/centre_aligned_file_upload-svg4dark.svg"
+                 alt="icon"/>
+
+            <p tabindex="0"
+               class="focus:outline-none text-gray-800 dark:text-gray-100 font-normal text-base tracking-normal ml-2 mr-4">
+              {{ this.fileName }}</p>
+            <p tabindex="0"
+               class="focus:outline-none text-gray-600 dark:text-gray-400 font-normal text-base tracking-normal">{{ progress }}
+              %</p>
+          </div>
+          <button role="button" aria-label="cross"
+                  class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:outline-none rounded-md cursor-pointer text-gray-400">
+            <ng-icon (click)="clearFile()" [name]="'heroXMarkSolid'" size="1.3rem"></ng-icon>
+
+          </button>
+        </div>
+
+
+        <div class="flex items-center justify-center w-full">
+          <button (click)="upload()"
+                  class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">
+            Submit
+          </button>
+          <button
+            (click)="closeModal()"
+            class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 focus:outline-none ml-3 bg-gray-100 dark:bg-gray-700 dark:border-gray-700 dark:hover:bg-gray-600 transition duration-150 text-gray-600 dark:text-gray-400 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+            aria-label="Close" role="button">Cancel
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</app-modal>
