@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  basePath: "https://sea-lion-app-ryzlb.ondigitalocean.app/",
-  baseApiPath: "https://sea-lion-app-ryzlb.ondigitalocean.app/api/v1"
+  basePath: "https://test-bench.onrender.com",
+  baseApiPath: "https://test-bench.onrender.com/api/v1"
 };
