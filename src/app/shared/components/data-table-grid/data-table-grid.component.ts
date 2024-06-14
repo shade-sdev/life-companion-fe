@@ -127,7 +127,6 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
   }
 
   protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
-    console.log(menus)
     return menus.map(value => value?.name ?? value).join(', ');
   }
 
