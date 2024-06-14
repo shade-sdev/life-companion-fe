@@ -115,7 +115,7 @@ export class HttpService {
     for (const key in obj) {
       if (obj.hasOwnProperty(key) && obj[key] !== undefined && obj[key] !== null && obj[key]?.length != 0) {
         if (Array.isArray(obj[key])) {
-          obj[key].forEach((value: any) => {
+          obj[key].filter((it: any) => it != undefined).forEach((value: any) => {
             params = params.append(key, value.toString());
           });
         } else {

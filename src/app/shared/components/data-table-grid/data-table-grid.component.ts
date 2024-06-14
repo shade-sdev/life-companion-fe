@@ -127,6 +127,7 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
   }
 
   protected contextMenuToInputField(menus: CheckedContextMenu<any>[]) {
+    console.log(menus)
     return menus.map(value => value?.name ?? value).join(', ');
   }
 
@@ -135,17 +136,20 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
     const target = event.target as HTMLElement;
     const scrollPosition = target.scrollTop + target.clientHeight;
     const maxScroll = target.scrollHeight;
-    const scrollThreshold = 50;
 
-    if (!this.bottomReached && maxScroll - scrollPosition < scrollThreshold) {
+    const baseThreshold = 50;
+    const viewportHeight = window.innerHeight;
+    const scaleFactor = viewportHeight / 1080;
+    const scrollThreshold = baseThreshold * scaleFactor + 10;
+    const thresholdCondition = maxScroll - scrollPosition <= scrollThreshold;
+
+    if (!this.bottomReached && thresholdCondition) {
       this.bottomReached = true;
-
-      if (this.maxPageNumber! > this.pageNumber && this.data.length != 0) {
-        this.pageNumber = this.pageNumber + 1;
+      if (this.maxPageNumber! > this.pageNumber) {
+        this.pageNumber += 1;
         this.loadData();
       }
-
-    } else if (maxScroll - scrollPosition >= scrollThreshold) {
+    } else if (maxScroll - scrollPosition > scrollThreshold) {
       this.bottomReached = false;
     }
   }
