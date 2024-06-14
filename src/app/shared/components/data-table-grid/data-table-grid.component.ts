@@ -123,6 +123,7 @@ export class DataTableGridComponent implements OnDestroy, OnInit {
     this.pageNumber = 0;
     this.pageSize = 10;
     this.data = [];
+    this.bottomReached = false;
     this.loadData();
   }
 
